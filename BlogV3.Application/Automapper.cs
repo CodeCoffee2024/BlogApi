@@ -1,0 +1,18 @@
+﻿using AutoMapper;
+using BlogV3.Application.Dtos;
+using BlogV3.Domain.Entities;
+
+namespace BlogV3.Application
+{
+    internal class AutomapperProfile : Profile
+    {
+        #region Public Constructors
+
+        public AutomapperProfile()
+        {
+            CreateMap<Tag, TagDto>().ReverseMap();
+        }
+
+        #endregion Public Constructors
+    }
+}

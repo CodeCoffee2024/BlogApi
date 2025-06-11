@@ -1,0 +1,13 @@
+# Ops thats bawal
+# VS Code settings
+.vs/
+
+# User-specific files
+*.env
+
+*/bin
+*/obj
+
+# Exclude appsettings files
+appsettings.json
+appsettings.*.json
