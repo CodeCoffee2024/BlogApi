@@ -1,9 +1,10 @@
-﻿using BlogV3.Application.Commands.Tag.CreateTag;
+﻿using BlogV3.Application.Abstractions;
+using BlogV3.Application.Commands.Tag.CreateTag;
 using BlogV3.Application.Queries.Tag.GetTagList;
 
 namespace BlogV3.Application.Requests
 {
-    public class TagRequest
+    public class TagRequest : PageRequest
     {
         #region Properties
 
@@ -18,7 +19,7 @@ namespace BlogV3.Application.Requests
         public CreateTagCommand SetAddCommand() =>
             new(PostId, Name);
 
-        public GetTagListQuery ToQuery() => new(Name);
+        public GetTagListQuery ToQuery() => new(Search, OrderBy, PageNumber, PageSize);
 
         #endregion Public Methods
     }

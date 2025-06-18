@@ -3,28 +3,12 @@ using BlogV3.Application.Dtos;
 using BlogV3.Application.Interfaces.Services;
 using BlogV3.Domain.Abstractions;
 using BlogV3.Domain.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace BlogV3.Infrastructure.Services
 {
-    public class TagService : ITagService
+    public class TagService(ITagRepository _repository, IMapper _mapper, ILogger<TagService> _logger) : ITagService
     {
-        #region Fields
-
-        private readonly ITagRepository _repository;
-        private readonly IMapper _mapper;
-
-        #endregion Fields
-
-        #region Public Constructors
-
-        public TagService(ITagRepository repository, IMapper mapper)
-        {
-            _repository = repository;
-            _mapper = mapper;
-        }
-
-        #endregion Public Constructors
-
         #region Public Methods
 
         public async Task<Result<List<TagDto>>> GetAllTagsAsync(string name = "", string status = "")
@@ -35,6 +19,7 @@ namespace BlogV3.Infrastructure.Services
 
         public async Task Delete(Guid id)
         {
+            _logger.LogInformation("Deleted Tag with Id " + id);
             var result = await _repository.GetByIdAsync(id);
             _repository.Remove(result!);
         }

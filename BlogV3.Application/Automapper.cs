@@ -11,6 +11,8 @@ namespace BlogV3.Application
         public AutomapperProfile()
         {
             CreateMap<Tag, TagDto>().ReverseMap();
+            CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Post, PostDto>().ReverseMap();
         }
 
         #endregion Public Constructors

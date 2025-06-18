@@ -23,6 +23,8 @@ namespace BlogV3.Infrastructure
             services.AddScoped<ITagService, TagService>();
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             AddPersistence(services, configuration);
 

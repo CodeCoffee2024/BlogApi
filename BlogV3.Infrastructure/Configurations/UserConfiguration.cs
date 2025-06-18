@@ -37,12 +37,12 @@ namespace BlogV3.Infrastructure.Configurations
             builder.HasOne(u => u.CreatedBy)
                 .WithMany()
                 .HasForeignKey(u => u.CreatedById)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(u => u.UpdatedBy)
                 .WithMany()
                 .HasForeignKey(u => u.UpdatedById)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
         #endregion Public Methods

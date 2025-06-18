@@ -11,7 +11,9 @@ namespace BlogV3.Domain.Entities
         public string Status { get; private set; }
         public string Title { get; private set; }
         public string Description { get; private set; }
-        public virtual IEnumerable<Tag>? Tags { get; init; }
+        public virtual ICollection<Tag>? Tags { get; set; }
+
+        protected Post() { }
 
         #endregion Properties
 

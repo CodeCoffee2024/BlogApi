@@ -1,18 +1,20 @@
-﻿using MediatR;
+﻿using BlogV3.Domain.Abstractions;
+using MediatR;
 
 namespace BlogV3.Application.Queries.Tag.GetTagList
 {
-    public class GetTagListQuery : IRequest<GetTagListResponse>
+    public class GetTagListQuery : PagedQuery, IRequest<Result<PageResult<GetTagListResponse>>>
     {
-        #region Properties
+        #region Public Constructors
 
-        public GetTagListQuery(string name)
+        public GetTagListQuery(string? search = null, string? orderBy = "Name", int pageNumber = 1, int pageSize = 1)
         {
-            Name = name;
+            Search = search;
+            OrderBy = orderBy;
+            PageNumber = pageNumber;
+            PageSize = pageSize;
         }
 
-        public string Name { get; set; } = string.Empty;
-
-        #endregion Properties
+        #endregion Public Constructors
     }
 }

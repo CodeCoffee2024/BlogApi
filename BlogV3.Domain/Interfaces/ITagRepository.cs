@@ -1,4 +1,5 @@
-﻿using BlogV3.Domain.Entities;
+﻿using BlogV3.Domain.Abstractions;
+using BlogV3.Domain.Entities;
 
 namespace BlogV3.Domain.Interfaces
 {
@@ -11,6 +12,8 @@ namespace BlogV3.Domain.Interfaces
         Task<bool> ExistsAsync(Guid id);
 
         Task<Tag?> GetByIdAsync(Guid id);
+
+        Task<PageResult<Tag>> GetPaginatedTagsAsync(int page, int pageSize, string? search, string orderBy);
 
         void Remove(Tag tag);
 

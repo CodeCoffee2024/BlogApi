@@ -1,9 +1,10 @@
 ﻿using BlogV3.Application.Dtos;
+using BlogV3.Domain.Abstractions;
 using MediatR;
 
 namespace BlogV3.Application.Queries.Tag.GetOneTag
 {
-    public class GetOneTagQuery : IRequest<TagDto>
+    public class GetOneTagQuery : IRequest<Result<TagDto>>
     {
         #region Properties
 
