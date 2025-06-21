@@ -18,7 +18,7 @@ namespace BlogV3.Application.Queries.Tag.GetOneTag
                 return Result.Failure<TagDto>(Error.Notfound);
             }
             var mappedResult = _mapper.Map<TagDto>(result);
-            return mappedResult;
+            return Result.Success(mappedResult);
         }
 
         #endregion Public Methods

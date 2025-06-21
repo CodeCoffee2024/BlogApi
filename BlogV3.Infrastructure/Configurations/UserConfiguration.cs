@@ -43,6 +43,10 @@ namespace BlogV3.Infrastructure.Configurations
                 .WithMany()
                 .HasForeignKey(u => u.UpdatedById)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasMany(u => u.UserRoles)
+                   .WithOne(ur => ur.User)
+                   .HasForeignKey(ur => ur.UserId);
         }
 
         #endregion Public Methods

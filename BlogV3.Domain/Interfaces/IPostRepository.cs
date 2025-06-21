@@ -14,6 +14,8 @@ namespace BlogV3.Domain.Interfaces
 
         Task AddAsync(Post post);
 
+        void Update(Post post);
+
         void Remove(Post tag);
 
         Task<PageResult<Post>> GetPaginatedPostsAsync(int page, int pageSize, string? search, string orderBy, Expression<Func<Post, bool>>? statusFilter);

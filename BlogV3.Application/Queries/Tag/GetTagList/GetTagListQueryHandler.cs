@@ -22,7 +22,7 @@ namespace BlogV3.Application.Queries.Tag.GetTagList
 
             return Result.Success(
                 new PageResult<GetTagListResponse>(
-                    new List<GetTagListResponse> { wrapped }, // ✅ wrapped in a list
+                    new List<GetTagListResponse> { wrapped },
                     pagedResult.TotalCount,
                     pagedResult.PageNumber,
                     pagedResult.PageSize,

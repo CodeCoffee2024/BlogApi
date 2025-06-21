@@ -1,4 +1,5 @@
-﻿using BlogV3.Domain.Entities;
+﻿using BlogV3.Application.Interfaces.Common;
+using BlogV3.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -8,7 +9,7 @@ namespace BlogV3.Infrastructure.Data
     {
         #region Public Methods
 
-        public static async Task SeedAsync(AppDbContext context, ILogger logger)
+        public static async Task SeedAsync(AppDbContext context, ILogger logger, IPasswordHasherService passwordHasherService)
         {
             // Apply any pending migrations
             await context.Database.MigrateAsync();
@@ -16,10 +17,61 @@ namespace BlogV3.Infrastructure.Data
             // Seed data if none exists
             if (!context.Users.Any())
             {
-                var admin = User.Seed("admin", "admin@email.com", "password", "activ", "admin", "admin", "");
+                var admin = User.Seed("admin", "admin@email.com", passwordHasherService.HashPassword("password"), "activ", "admin", "admin", "");
                 context.Users.Add(admin);
+                admin.FlagAsSystemGenerated();
                 await context.SaveChangesAsync();
                 logger.LogInformation("Seeded default user.");
+
+                // Create module
+                Module[] modules = [
+                    Module.Create("Modules", admin.Id!.Value),
+                    Module.Create("Posts", admin.Id!.Value),
+                    Module.Create("Categories", admin.Id!.Value),
+                    Module.Create("Users", admin.Id!.Value),
+                    Module.Create("Tags", admin.Id!.Value)
+                ];
+                var module = modules[0];
+                var post = modules[1];
+                var category = modules[2];
+                var user = modules[3];
+                var tag = modules[4];
+                // Add permissions module
+                var viewPermissionModule = module.AddPermission("View");
+                var editPermissionModule = module.AddPermission("Modify");
+                module.FlagAsSystemGenerated();
+
+                // Add permissions post
+                var viewPermissionPost = post.AddPermission("View");
+                var editPermissionPost = post.AddPermission("Modify");
+                post.FlagAsSystemGenerated();
+
+                // Add permissions category
+                var viewPermissionCategory = category.AddPermission("View");
+                var editPermissionCategory = category.AddPermission("Modify");
+                category.FlagAsSystemGenerated();
+
+                // Add permissions user
+                var viewPermissionUser = user.AddPermission("View");
+                var editPermissionUser = user.AddPermission("Modify");
+                user.FlagAsSystemGenerated();
+
+                // Create role
+                var adminRole = Role.Create("Admin", admin.Id!.Value);
+                adminRole.AddPermission(viewPermissionModule);
+                adminRole.AddPermission(editPermissionModule);
+                adminRole.AddPermission(viewPermissionPost);
+                adminRole.AddPermission(editPermissionPost);
+                adminRole.AddPermission(viewPermissionCategory);
+                adminRole.AddPermission(editPermissionCategory);
+                adminRole.AddPermission(viewPermissionUser);
+                adminRole.AddPermission(editPermissionUser);
+                admin.AssignRole(adminRole);
+
+                // Add to DB
+                await context.Modules.AddRangeAsync(modules);
+                await context.Roles.AddAsync(adminRole);
+                await context.SaveChangesAsync();
             }
             if (!context.Categories.Any())
             {

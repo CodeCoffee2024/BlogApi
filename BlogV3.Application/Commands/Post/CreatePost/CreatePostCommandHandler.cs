@@ -13,7 +13,6 @@ namespace BlogV3.Application.Commands.Post.CreatePost
     internal sealed class CreatePostCommandHandler(
         IPostRepository _repository,
         ITagRepository _tagRepository,
-        IUserRepository _userRepository,
         IMapper _mappper,
         IValidator<CreatePostCommand> _validator,
         IUnitOfWork _unitOfWork
@@ -30,14 +29,13 @@ namespace BlogV3.Application.Commands.Post.CreatePost
                 return Result.Failure<List<PostDto>>(Error.Validation, validationResult.ToErrorList());
             }
 
-            var admin = await _userRepository.GetByEmailAsync("admin@email.com");
             var entity = BlogV3.Domain.Entities.Post.Create(
                 request.CategoryId,
                 Status.Active.GetDescription()!,
                 request.Title,
                 request.Description,
                 DateTime.Now,
-                admin!.Id!.Value
+                request.UserId
             );
             await _repository.AddAsync(entity);
             foreach (TagDto tag in request.Tags)

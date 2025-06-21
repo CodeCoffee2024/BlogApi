@@ -16,8 +16,8 @@ namespace BlogV3.Application.Requests
 
         #region Public Methods
 
-        public CreateCategoryCommand SetAddCommand() =>
-            new(Name, Status);
+        public CreateCategoryCommand SetAddCommand(Guid UserId) =>
+            new(UserId, Name);
 
         public GetCategoryListQuery ToQuery() => new(Search, OrderBy, PageNumber, PageSize, Status);
 

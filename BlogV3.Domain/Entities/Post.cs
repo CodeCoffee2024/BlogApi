@@ -34,10 +34,9 @@ namespace BlogV3.Domain.Entities
             return post;
         }
 
-        public Post Update(Guid categoryId, string status, string title, string description, DateTime updatedOn, Guid updatedById)
+        public Post Update(Guid categoryId, string title, string description, DateTime updatedOn, Guid updatedById)
         {
             CategoryId = categoryId;
-            Status = status;
             Title = title;
             Description = description;
             SetUpdated(updatedById, updatedOn);

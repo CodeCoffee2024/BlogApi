@@ -16,6 +16,18 @@ namespace BlogV3.Infrastructure.Repositories
         public async Task<User?> GetByEmailAsync(string email) =>
             await _context.Set<User>().FirstOrDefaultAsync(user => user.Email == email);
 
+        public async Task<User?> EmailUsernameExists(string email, string username) =>
+            await _context.Set<User>().FirstOrDefaultAsync(user => user.Email == email || user.UserName == username);
+
+        public async Task<bool> HasPermission(Guid userId, string moduleName, string permissionName) =>
+            await _context.Set<User>()
+            .Where(u => u.Id == userId)
+            .SelectMany(u => u.UserRoles)
+            .SelectMany(ur => ur.Role.RolePermissions)
+            .AnyAsync(rp =>
+                rp.Permission.Name == permissionName &&
+                rp.Permission.Module.Name == moduleName);
+
         #endregion Public Constructors
     }
 }

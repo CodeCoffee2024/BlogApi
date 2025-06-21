@@ -4,6 +4,6 @@ using MediatR;
 namespace BlogV3.Application.Commands.Category.CreateCategory
 {
     public sealed record CreateCategoryCommand(
-        string Name,
-        string Status) : IRequest<Result>;
+        Guid UserId,
+        string Name) : IRequest<Result>;
 }

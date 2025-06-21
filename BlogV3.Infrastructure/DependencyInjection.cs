@@ -1,9 +1,11 @@
 ﻿using BlogV3.Application.Interfaces.Common;
 using BlogV3.Application.Interfaces.Services;
 using BlogV3.Domain.Interfaces;
+using BlogV3.Infrastructure.Auth;
 using BlogV3.Infrastructure.Data;
 using BlogV3.Infrastructure.Repositories;
 using BlogV3.Infrastructure.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +27,11 @@ namespace BlogV3.Infrastructure
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPermissionService, PermissionService>();
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<IPasswordHasherService, PasswordHasherService>();
+            services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped<PasswordHasher<object>>();
 
             AddPersistence(services, configuration);
 

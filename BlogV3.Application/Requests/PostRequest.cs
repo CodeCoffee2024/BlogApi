@@ -1,5 +1,6 @@
 ﻿using BlogV3.Application.Abstractions;
 using BlogV3.Application.Commands.Post.CreatePost;
+using BlogV3.Application.Commands.Post.UpdatePost;
 using BlogV3.Application.Dtos;
 using BlogV3.Application.Queries.Post.GetPostList;
 
@@ -20,8 +21,11 @@ namespace BlogV3.Application.Requests
 
         #region Public Methods
 
-        public CreatePostCommand SetAddCommand() =>
-            new(Title, Description, CategoryId, Tags);
+        public CreatePostCommand SetAddCommand(Guid UserId) =>
+            new(UserId, Title, Description, CategoryId, Tags);
+
+        public UpdatePostCommand SetUpdateCommand(Guid Id, Guid UserId) =>
+            new(UserId, Id, Title, Description, CategoryId, Tags);
 
         public GetPostListQuery ToQuery() => new(Search, OrderBy, PageNumber, PageSize, Status);
 

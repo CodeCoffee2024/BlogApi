@@ -6,13 +6,15 @@ namespace BlogV3.Domain.Entities
     {
         #region Properties
 
-        public string UserName { get; private set; }
-        public string Email { get; private set; }
-        public string Password { get; private set; }
-        public string Status { get; private set; }
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public string MiddleName { get; private set; }
+        public string UserName { get; private set; } = string.Empty;
+        public string Email { get; private set; } = string.Empty;
+        public string Password { get; private set; } = string.Empty;
+        public string Status { get; private set; } = string.Empty;
+        public string FirstName { get; private set; } = string.Empty;
+        public string LastName { get; private set; } = string.Empty;
+        public string MiddleName { get; private set; } = string.Empty;
+        public bool IsSystemGenerated { get; private set; } = false;
+        public virtual ICollection<UserRole> UserRoles { get; private set; } = new List<UserRole>();
         public virtual IEnumerable<Post>? Posts { get; }
 
         #endregion Properties
@@ -30,6 +32,8 @@ namespace BlogV3.Domain.Entities
             LastName = lastName;
             MiddleName = middleName;
         }
+
+        public void FlagAsSystemGenerated() => IsSystemGenerated = true;
 
         public static User Create(string userName, string email, string password, string status, string firstName, string lastName, string middleName, DateTime createdOn, Guid createdById, bool isSeed = false)
         {
@@ -58,6 +62,10 @@ namespace BlogV3.Domain.Entities
             MiddleName = middleName;
             SetUpdated(updatedById, updatedOn);
             return this;
+        }
+        public void AssignRole(Role role)
+        {
+            UserRoles.Add(new UserRole { User = this, Role = role });
         }
 
         #endregion Private Constructors

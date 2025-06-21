@@ -23,7 +23,7 @@ namespace BlogV3.Application.Commands.Category.DeleteCategory
             }
             else
             {
-                return Result.Failure(Error.None);
+                return Result.Failure(Error.Notfound);
             }
         }
 

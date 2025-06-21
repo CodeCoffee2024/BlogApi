@@ -10,7 +10,11 @@ namespace BlogV3.Domain.Interfaces
 
         Task<bool> ExistsAsync(Guid id);
 
+        Task<bool> HasPermission(Guid id, string moduleName, string permissionName);
+
         Task<User?> GetByIdAsync(Guid id);
+
+        Task<User?> EmailUsernameExists(string email, string username);
 
         Task<User?> GetByEmailAsync(string email);
 

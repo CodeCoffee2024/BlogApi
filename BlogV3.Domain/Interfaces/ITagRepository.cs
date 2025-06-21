@@ -13,6 +13,8 @@ namespace BlogV3.Domain.Interfaces
 
         Task<Tag?> GetByIdAsync(Guid id);
 
+        Task<IEnumerable<Tag>?> GetByPostIdAsync(Guid id);
+
         Task<PageResult<Tag>> GetPaginatedTagsAsync(int page, int pageSize, string? search, string orderBy);
 
         void Remove(Tag tag);

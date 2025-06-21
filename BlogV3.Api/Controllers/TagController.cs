@@ -1,7 +1,9 @@
-﻿using BlogV3.Api.Shared;
+﻿using BlogV3.Api.Attributes;
+using BlogV3.Api.Shared;
 using BlogV3.Application.Commands.Tag.DeleteTag;
 using BlogV3.Application.Queries.Tag.GetOneTag;
 using BlogV3.Application.Requests;
+using BlogV3.Common.Constants;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +24,7 @@ namespace BlogV3.Api.Controllers
         #region Public Methods
 
         [HttpGet("GetTags")]
+        [PermissionAuthorize(Modules.TAG, Permissions.VIEW)]
         public async Task<IActionResult> GetListing([FromQuery] TagRequest request, CancellationToken cancellationToken)
         {
             var query = request.ToQuery();
@@ -30,6 +33,7 @@ namespace BlogV3.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [PermissionAuthorize(Modules.TAG, Permissions.MODIFY)]
         public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var command = new DeleteTagCommand(id);
@@ -38,6 +42,7 @@ namespace BlogV3.Api.Controllers
         }
 
         [HttpPost]
+        [PermissionAuthorize(Modules.TAG, Permissions.MODIFY)]
         public async Task<IActionResult> Create([FromBody] TagRequest request, CancellationToken cancellationToken)
         {
             var command = request.SetAddCommand();
@@ -46,6 +51,7 @@ namespace BlogV3.Api.Controllers
         }
 
         [HttpGet("{id}")]
+        [PermissionAuthorize(Modules.TAG, Permissions.VIEW)]
         public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var command = new GetOneTagQuery(id);

@@ -11,7 +11,6 @@ namespace BlogV3.Application.Commands.Category.CreateCategory
 {
     internal sealed class CreateCategoryCommandHandler(
         ICategoryRepository _repository,
-        IUserRepository _userRepository,
         IValidator<CreateCategoryCommand> _validator,
         IUnitOfWork _unitOfWork
     ) : IRequestHandler<CreateCategoryCommand, Result>
@@ -27,8 +26,7 @@ namespace BlogV3.Application.Commands.Category.CreateCategory
                 return Result.Failure<List<CategoryDto>>(Error.Validation, validationResult.ToErrorList());
             }
 
-            var admin = await _userRepository.GetByEmailAsync("admin@email.com");
-            var entity = BlogV3.Domain.Entities.Category.Create(request.Name, Status.Active.GetDescription()!, DateTime.Now, admin!.Id!.Value);
+            var entity = BlogV3.Domain.Entities.Category.Create(request.Name, Status.Active.GetDescription()!, DateTime.Now, request.UserId);
             await _repository.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
             return Result.Success(entity);

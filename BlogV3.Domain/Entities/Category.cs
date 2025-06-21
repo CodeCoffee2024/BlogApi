@@ -8,6 +8,7 @@ namespace BlogV3.Domain.Entities
 
         public string Name { get; private set; }
         public string Status { get; private set; }
+        public bool IsSystemGenerated { get; private set; } = false;
         public virtual IEnumerable<Post>? Posts { get; }
 
         #endregion Properties
@@ -35,6 +36,7 @@ namespace BlogV3.Domain.Entities
             SetUpdated(updatedById, updatedOn);
             return this;
         }
+        public void FlagAsSystemGenerated() => IsSystemGenerated = true;
 
         #endregion Private Constructors
     }

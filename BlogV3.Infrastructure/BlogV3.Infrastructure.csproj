@@ -22,5 +22,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\BlogV3.Application\BlogV3.Application.csproj" />
+		<ProjectReference Include="..\BlogV3.Common\BlogV3.Common.csproj" />
 	</ItemGroup>
 </Project>

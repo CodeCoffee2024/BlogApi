@@ -13,6 +13,7 @@ namespace BlogV3.Application
             CreateMap<Tag, TagDto>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Post, PostDto>().ReverseMap();
+            CreateMap<Module, ModuleDto>().ReverseMap();
         }
 
         #endregion Public Constructors
