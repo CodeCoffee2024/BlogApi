@@ -19,8 +19,12 @@ namespace BlogV3.Application
                 opt => opt.MapFrom(src => src.UserRoles.Select(ur => ur.Role)))
             .ReverseMap()
             .ForMember(dest => dest.UserRoles, opt => opt.Ignore());
-            CreateMap<Role, RoleDto>().ReverseMap();
             CreateMap<Permission, PermissionDto>().ReverseMap();
+            CreateMap<Role, RoleDto>()
+            .ForMember(dest => dest.Permissions,
+                opt => opt.MapFrom(src => src.RolePermissions.Select(ur => ur.Permission)))
+            .ReverseMap()
+            .ForMember(dest => dest.RolePermissions, opt => opt.Ignore());
         }
 
         #endregion Public Constructors

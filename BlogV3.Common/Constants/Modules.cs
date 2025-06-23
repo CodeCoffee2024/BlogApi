@@ -8,6 +8,7 @@
         public const string CATEGORY = "Categories";
         public const string MODULE = "Modules";
         public const string PERMISSION = "Permissions";
+        public const string ROLE = "Roles";
         public const string USER = "Users";
         public const string TAG = "Tags";
 

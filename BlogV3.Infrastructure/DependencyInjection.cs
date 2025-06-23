@@ -32,6 +32,7 @@ namespace BlogV3.Infrastructure
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPermissionRepository, PermissionRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<PasswordHasher<object>>();
 
             AddPersistence(services, configuration);

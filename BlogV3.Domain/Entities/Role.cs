@@ -13,7 +13,7 @@ namespace BlogV3.Domain.Entities
 
         #region Properties
 
-        public string Name { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         public bool IsSystemGenerated { get; private set; } = false;
 
         public virtual ICollection<UserRole> UserRoles { get; private set; } = new List<UserRole>();
@@ -29,6 +29,12 @@ namespace BlogV3.Domain.Entities
             var entity = new Role(name);
             entity.SetCreated(createdById, DateTime.Now);
             return entity;
+        }
+        public Role Update(string name, Guid updatedById)
+        {
+            Name = name;
+            SetUpdated(updatedById, DateTime.Now);
+            return this;
         }
         public void FlagAsSystemGenerated() => IsSystemGenerated = true;
 

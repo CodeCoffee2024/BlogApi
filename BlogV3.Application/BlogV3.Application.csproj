@@ -19,8 +19,5 @@
   <ItemGroup>
     <ProjectReference Include="..\BlogV3.Domain\BlogV3.Domain.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commands\UserRole\" />
-  </ItemGroup>
 
 </Project>
