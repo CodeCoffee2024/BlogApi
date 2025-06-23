@@ -2,12 +2,6 @@
 {
     public class PageResult<T>
     {
-        #region Fields
-
-        private IReadOnlyList<T> mapped;
-
-        #endregion Fields
-
         #region Public Constructors
 
         public PageResult(IReadOnlyList<T> items, int totalCount, int pageNumber, int pageSize, string orderBy)

@@ -6,8 +6,8 @@ namespace BlogV3.Domain.Entities
     {
         #region Properties
 
-        public string Name { get; private set; }
-        public string Status { get; private set; }
+        public string Name { get; private set; } = string.Empty;
+        public string Status { get; private set; } = string.Empty;
         public bool IsSystemGenerated { get; private set; } = false;
         public virtual IEnumerable<Post>? Posts { get; }
 

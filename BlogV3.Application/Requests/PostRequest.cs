@@ -24,7 +24,7 @@ namespace BlogV3.Application.Requests
         public CreatePostCommand SetAddCommand(Guid UserId) =>
             new(UserId, Title, Description, CategoryId, Tags);
 
-        public UpdatePostCommand SetUpdateCommand(Guid Id, Guid UserId) =>
+        public UpdatePostCommand SetUpdateCommand(Guid UserId, Guid Id) =>
             new(UserId, Id, Title, Description, CategoryId, Tags);
 
         public GetPostListQuery ToQuery() => new(Search, OrderBy, PageNumber, PageSize, Status);

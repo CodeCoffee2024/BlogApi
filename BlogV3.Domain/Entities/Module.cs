@@ -4,7 +4,7 @@ namespace BlogV3.Domain.Entities
 {
     public record class Module : AuditableEntity
     {
-        public string Name { get; private set; }
+        public string Name { get; private set; } = string.Empty;
         public bool IsSystemGenerated { get; private set; } = false;
         public virtual ICollection<Permission> Permissions { get; private set; } = new List<Permission>();
         protected Module() { }
@@ -30,7 +30,7 @@ namespace BlogV3.Domain.Entities
 
         public Permission AddPermission(string permissionName)
         {
-            var permission = new Permission(permissionName, this);
+            var permission = new Permission(permissionName, Id!.Value!);
             Permissions.Add(permission);
             return permission;
         }

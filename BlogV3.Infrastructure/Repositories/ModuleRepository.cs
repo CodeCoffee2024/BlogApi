@@ -16,7 +16,7 @@ namespace BlogV3.Infrastructure.Repositories
 
         public async Task<PageResult<Module>> GetPaginatedPostsAsync(int page, int pageSize, string? search, string orderBy)
         {
-            return await GetPaginatedAsync(page, pageSize, search, new[] { "Status", "Title", "Description", "Category.Name", "Tags.Name" }, orderBy);
+            return await GetPaginatedAsync(page, pageSize, search, new[] { "Name" }, orderBy);
         }
 
         public async Task<bool> ExistsByNameAsync(string name)

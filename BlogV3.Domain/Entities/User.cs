@@ -51,12 +51,11 @@ namespace BlogV3.Domain.Entities
             return user;
         }
 
-        public User Update(string userName, string email, string password, string status, string firstName, string lastName, string middleName, DateTime updatedOn, Guid updatedById)
+        public User Update(string userName, string email, string password, string firstName, string lastName, string middleName, DateTime updatedOn, Guid updatedById)
         {
             UserName = userName;
             Email = email;
             Password = password;
-            Status = status;
             FirstName = firstName;
             LastName = lastName;
             MiddleName = middleName;

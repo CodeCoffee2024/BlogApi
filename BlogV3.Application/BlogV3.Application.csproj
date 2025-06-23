@@ -20,10 +20,7 @@
     <ProjectReference Include="..\BlogV3.Domain\BlogV3.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\Permission\" />
     <Folder Include="Commands\UserRole\" />
-    <Folder Include="Commands\User\" />
-    <Folder Include="Queries\Module\GetModuleList\" />
   </ItemGroup>
 
 </Project>

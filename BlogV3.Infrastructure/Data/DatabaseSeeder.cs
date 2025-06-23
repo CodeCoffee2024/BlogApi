@@ -28,14 +28,12 @@ namespace BlogV3.Infrastructure.Data
                     Module.Create("Modules", admin.Id!.Value),
                     Module.Create("Posts", admin.Id!.Value),
                     Module.Create("Categories", admin.Id!.Value),
-                    Module.Create("Users", admin.Id!.Value),
-                    Module.Create("Tags", admin.Id!.Value)
+                    Module.Create("Users", admin.Id!.Value)
                 ];
                 var module = modules[0];
                 var post = modules[1];
                 var category = modules[2];
                 var user = modules[3];
-                var tag = modules[4];
                 // Add permissions module
                 var viewPermissionModule = module.AddPermission("View");
                 var editPermissionModule = module.AddPermission("Modify");

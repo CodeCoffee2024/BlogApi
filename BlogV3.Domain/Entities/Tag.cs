@@ -6,7 +6,7 @@ namespace BlogV3.Domain.Entities
     {
         public virtual Post? Post { get; private set; }
         public Guid PostId { get; private set; }
-        public string Name { get; private set; }
+        public string Name { get; private set; } = string.Empty;
 
         protected Tag() { }
         private Tag(Guid postId, string name)

@@ -23,14 +23,15 @@ namespace BlogV3.Infrastructure
             //services.AddTransient<IDateTimeProvider, DateTimeProvider>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ITagService, TagService>();
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<IPasswordHasherService, PasswordHasherService>();
+            services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped<IPermissionService, PermissionService>();
             services.AddScoped<ITagRepository, TagRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IPermissionService, PermissionService>();
-            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
-            services.AddScoped<IPasswordHasherService, PasswordHasherService>();
-            services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped<IPermissionRepository, PermissionRepository>();
             services.AddScoped<PasswordHasher<object>>();
 
             AddPersistence(services, configuration);

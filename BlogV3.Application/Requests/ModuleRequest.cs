@@ -1,7 +1,7 @@
 ﻿using BlogV3.Application.Abstractions;
 using BlogV3.Application.Commands.Module.CreateModule;
 using BlogV3.Application.Commands.Module.UpdateModule;
-using BlogV3.Application.Queries.Post.GetPostList;
+using BlogV3.Application.Queries.Module.GetModuleList;
 
 namespace BlogV3.Application.Requests
 {
@@ -22,7 +22,7 @@ namespace BlogV3.Application.Requests
         public UpdateModuleCommand SetUpdateCommand(Guid UserId, Guid Id) =>
             new(UserId, Id, Name);
 
-        public GetPostListQuery ToQuery() => new(Search, OrderBy, PageNumber, PageSize);
+        public GetModuleListQuery ToQuery() => new(Search, OrderBy, PageNumber, PageSize);
 
         #endregion Public Methods
     }

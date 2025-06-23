@@ -1,4 +1,6 @@
-﻿using BlogV3.Domain.Entities;
+﻿using System.Linq.Expressions;
+using BlogV3.Domain.Abstractions;
+using BlogV3.Domain.Entities;
 
 namespace BlogV3.Domain.Interfaces
 {
@@ -12,15 +14,23 @@ namespace BlogV3.Domain.Interfaces
 
         Task<bool> HasPermission(Guid id, string moduleName, string permissionName);
 
+        Task<bool> UsernameExists(string username);
+
+        Task<bool> EmailExists(string email);
+
         Task<User?> GetByIdAsync(Guid id);
 
         Task<User?> EmailUsernameExists(string email, string username);
 
         Task<User?> GetByEmailAsync(string email);
 
+        Task<User?> GetByUsernameAsync(string username);
+
         void Remove(User tag);
 
         Task AddAsync(User tag);
+
+        Task<PageResult<User>> GetPaginatedUsersAsync(int page, int pageSize, string? search, string orderBy, Expression<Func<User, bool>>? statusFilter);
 
         #endregion Public Methods
     }

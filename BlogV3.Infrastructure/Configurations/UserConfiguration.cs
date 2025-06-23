@@ -27,13 +27,13 @@ namespace BlogV3.Infrastructure.Configurations
                 .HasMaxLength(5);
             builder.Property(ut => ut.FirstName)
                 .IsRequired()
-                .HasMaxLength(5);
+                .HasMaxLength(50);
             builder.Property(ut => ut.MiddleName)
                 .IsRequired()
-                .HasMaxLength(5);
+                .HasMaxLength(50);
             builder.Property(ut => ut.LastName)
                 .IsRequired()
-                .HasMaxLength(5);
+                .HasMaxLength(50);
             builder.HasOne(u => u.CreatedBy)
                 .WithMany()
                 .HasForeignKey(u => u.CreatedById)

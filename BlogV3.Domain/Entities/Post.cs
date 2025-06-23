@@ -8,9 +8,9 @@ namespace BlogV3.Domain.Entities
 
         public Guid CategoryId { get; private set; }
         public virtual Category? Category { get; init; }
-        public string Status { get; private set; }
-        public string Title { get; private set; }
-        public string Description { get; private set; }
+        public string Status { get; private set; } = string.Empty;
+        public string Title { get; private set; } = string.Empty;
+        public string Description { get; private set; } = string.Empty;
         public virtual ICollection<Tag>? Tags { get; set; }
 
         protected Post() { }

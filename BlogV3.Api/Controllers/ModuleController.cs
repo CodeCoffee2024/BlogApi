@@ -25,7 +25,7 @@ namespace BlogV3.Api.Controllers
 
         [HttpGet("GetModules")]
         [PermissionAuthorize(Modules.MODULE, Permissions.VIEW)]
-        public async Task<IActionResult> GetListing([FromQuery] CategoryRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetListing([FromQuery] ModuleRequest request, CancellationToken cancellationToken)
         {
             var query = request.ToQuery();
             var result = await _sender.Send(query, cancellationToken);
