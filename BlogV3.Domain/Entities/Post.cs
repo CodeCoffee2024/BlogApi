@@ -12,6 +12,7 @@ namespace BlogV3.Domain.Entities
         public string Title { get; private set; } = string.Empty;
         public string Description { get; private set; } = string.Empty;
         public virtual ICollection<Tag>? Tags { get; set; }
+        public string ImgPath { get; private set; } = string.Empty;
 
         protected Post() { }
 
@@ -19,17 +20,18 @@ namespace BlogV3.Domain.Entities
 
         #region Private Constructors
 
-        private Post(Guid categoryId, string status, string title, string description)
+        private Post(Guid categoryId, string status, string title, string description, string imgPath)
         {
+            ImgPath = imgPath;
             CategoryId = categoryId;
             Status = status;
             Title = title;
             Description = description;
         }
 
-        public static Post Create(Guid categoryId, string status, string title, string description, DateTime createdOn, Guid createdById)
+        public static Post Create(Guid categoryId, string status, string title, string description, DateTime createdOn, Guid createdById, string imgPath = "")
         {
-            Post post = new Post(categoryId, status, title, description);
+            Post post = new Post(categoryId, status, title, description, imgPath);
             post.SetCreated(createdById, createdOn);
             return post;
         }

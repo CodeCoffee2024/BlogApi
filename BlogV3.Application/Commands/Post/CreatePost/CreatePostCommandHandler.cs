@@ -12,6 +12,7 @@ namespace BlogV3.Application.Commands.Post.CreatePost
 {
     internal sealed class CreatePostCommandHandler(
         IPostRepository _repository,
+        IFileService _fileService,
         ITagRepository _tagRepository,
         IMapper _mappper,
         IValidator<CreatePostCommand> _validator,
@@ -28,14 +29,15 @@ namespace BlogV3.Application.Commands.Post.CreatePost
             {
                 return Result.Failure<List<PostDto>>(Error.Validation, validationResult.ToErrorList());
             }
-
+            string imgPath = await _fileService.UploadImage(request.Img);
             var entity = BlogV3.Domain.Entities.Post.Create(
                 request.CategoryId,
                 Status.Active.GetDescription()!,
                 request.Title,
                 request.Description,
                 DateTime.Now,
-                request.UserId
+                request.UserId,
+                imgPath
             );
             await _repository.AddAsync(entity);
             foreach (TagDto tag in request.Tags)

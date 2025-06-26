@@ -25,6 +25,7 @@ namespace BlogV3.Infrastructure
             services.AddScoped<ITagService, TagService>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<IPasswordHasherService, PasswordHasherService>();
+            services.AddScoped<IFileService, FileService>();
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<IPermissionService, PermissionService>();
             services.AddScoped<ITagRepository, TagRepository>();

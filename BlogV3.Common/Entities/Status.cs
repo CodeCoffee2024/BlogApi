@@ -10,6 +10,9 @@ namespace BlogV3.Common.Entities
         [Description("inact")]
         Inactive,
 
+        [Description("forve")]
+        ForVerification,
+
         [Description("")]
         None,
     }

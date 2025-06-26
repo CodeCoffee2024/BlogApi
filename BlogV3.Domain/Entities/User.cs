@@ -44,6 +44,11 @@ namespace BlogV3.Domain.Entities
             }
             return user;
         }
+        public static User Register(string userName, string email, string password, string status, string firstName, string lastName, string middleName)
+        {
+            User user = new User(userName, email, password, status, firstName, lastName, middleName);
+            return user;
+        }
 
         public static User Seed(string userName, string email, string password, string status, string firstName, string lastName, string middleName)
         {

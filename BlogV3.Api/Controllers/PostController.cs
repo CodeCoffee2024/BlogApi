@@ -45,7 +45,7 @@ namespace BlogV3.Api.Controllers
 
         [HttpPost]
         [PermissionAuthorize(Modules.POST, Permissions.MODIFY)]
-        public async Task<IActionResult> Create([FromBody] PostRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Create([FromForm] PostRequest request, CancellationToken cancellationToken)
         {
             var command = request.SetAddCommand(UserId);
             var result = await _sender.Send(command, cancellationToken);

@@ -27,6 +27,14 @@ namespace BlogV3.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost("Register")]
+        public async Task<IActionResult> Register([FromBody] UserRequest request, CancellationToken cancellationToken)
+        {
+            var command = request.SetRegisterCommand();
+            var result = await _sender.Send(command, cancellationToken);
+            return Ok(result);
+        }
+
         #endregion Public Methods
     }
 }

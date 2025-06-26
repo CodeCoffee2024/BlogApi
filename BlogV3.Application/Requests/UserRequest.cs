@@ -1,4 +1,5 @@
 ﻿using BlogV3.Application.Abstractions;
+using BlogV3.Application.Commands.Auth.Register;
 using BlogV3.Application.Commands.User.CreateUser;
 using BlogV3.Application.Commands.User.UpdateUser;
 using BlogV3.Application.Dtos;
@@ -26,6 +27,9 @@ namespace BlogV3.Application.Requests
 
         public CreateUserCommand SetAddCommand(Guid UserId) =>
             new(UserId, UserName, Email, Password, FirstName, LastName, MiddleName);
+
+        public RegisterCommand SetRegisterCommand() =>
+            new(UserName, Email, Password, FirstName, LastName, MiddleName);
 
         public UpdateUserCommand SetUpdateCommand(Guid Id, Guid UserId) =>
             new(UserId, Id, UserName, Email, Password, FirstName, LastName, MiddleName);

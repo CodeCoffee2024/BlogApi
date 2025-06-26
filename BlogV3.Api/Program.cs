@@ -51,6 +51,30 @@ builder.Services.AddSwaggerGen(options =>
         Title = "Blog API",
         Version = "v1"
     });
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Enter 'Bearer' [space] and then your valid token.\n\nExample: `Bearer eyJhbGciOi...`"
+    });
+
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Id = "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            new string[] {}
+        }
+    });
 });
 
 Log.Logger = new LoggerConfiguration()
@@ -70,6 +94,8 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Blog API V1");
         options.RoutePrefix = string.Empty; // Swagger at root URL
     });
+
+    app.UseStaticFiles();
 }
 using (var scope = app.Services.CreateScope())
 {

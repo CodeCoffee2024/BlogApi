@@ -41,6 +41,10 @@ namespace BlogV3.Infrastructure.Configurations
                    .WithMany()
                    .HasForeignKey(p => p.UpdatedById)
                    .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Property(p => p.ImgPath)
+                   .IsRequired()
+                   .HasMaxLength(1000);
         }
 
         #endregion Public Methods
