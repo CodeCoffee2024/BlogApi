@@ -24,7 +24,7 @@ namespace BlogV3.Api.Controllers
         {
             var query = request.LoginQuery();
             var result = await _sender.Send(query, cancellationToken);
-            return Ok(result);
+            return HandleResponse(result);
         }
 
         [HttpPost("Register")]
@@ -32,7 +32,7 @@ namespace BlogV3.Api.Controllers
         {
             var command = request.SetRegisterCommand();
             var result = await _sender.Send(command, cancellationToken);
-            return Ok(result);
+            return HandleResponse(result);
         }
 
         #endregion Public Methods

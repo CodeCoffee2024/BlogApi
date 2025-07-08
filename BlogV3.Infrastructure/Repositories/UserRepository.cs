@@ -21,8 +21,8 @@ namespace BlogV3.Infrastructure.Repositories
         public async Task<User?> GetByUsernameAsync(string username) =>
             await _context.Set<User>().FirstOrDefaultAsync(user => user.UserName == username);
 
-        public async Task<User?> EmailUsernameExists(string email, string username) =>
-            await _context.Set<User>().FirstOrDefaultAsync(user => user.Email == email || user.UserName == username);
+        public async Task<User?> EmailUsernameExists(string usernameEmail) =>
+            await _context.Set<User>().FirstOrDefaultAsync(user => user.Email == usernameEmail || user.UserName == usernameEmail);
 
         public async Task<bool> EmailExists(string email) =>
             await _context.Set<User>().AnyAsync(user => user.Email == email);

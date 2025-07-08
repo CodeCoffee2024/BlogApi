@@ -9,20 +9,20 @@ namespace BlogV3.Application.Queries.Auth.Login
         IUserRepository _repository,
         IJwtTokenGenerator _jwtTokenGenerator,
         IPasswordHasherService _passwordHasherService
-    ) : IRequestHandler<LoginQuery, Result<LoginResponse>>
+    ) : IRequestHandler<LoginQuery, Result>
     {
         #region Public Methods
 
-        public async Task<Result<LoginResponse>> Handle(LoginQuery request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
-            var user = await _repository.EmailUsernameExists(request.Email!, request.Username!);
+            var user = await _repository.EmailUsernameExists(request.UsernameEmail!);
             if (user == null)
             {
-                Result.Failure(Error.Notfound);
+                return Result.Failure(Error.Notfound("User"));
             }
             if (!_passwordHasherService.VerifyPassword(user!.Password, request.Password!))
             {
-                Result.Failure(Error.Notfound);
+                return Result.Failure(Error.Invalid("User", "Invalid password"));
             }
             var token = _jwtTokenGenerator.GenerateToken(user!);
             return Result.Success(token);

@@ -15,7 +15,7 @@ namespace BlogV3.Application.Queries.Post.GetOnePost
             var result = await _repository.GetByIdAsync(request.Id);
             if (result == null)
             {
-                return Result.Failure<PostDto>(Error.Notfound);
+                return Result.Failure<PostDto>(Error.Notfound("Post"));
             }
             var mappedResult = _mapper.Map<PostDto>(result);
             return Result.Success(mappedResult);

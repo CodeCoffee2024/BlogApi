@@ -23,7 +23,7 @@ namespace BlogV3.Application.Commands.Permission.DeletePermission
             }
             else
             {
-                return Result.Failure(Error.Notfound);
+                return Result.Failure(Error.Notfound("Permission"));
             }
         }
 

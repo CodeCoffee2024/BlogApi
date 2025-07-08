@@ -15,7 +15,7 @@ namespace BlogV3.Application.Queries.Permission.GetOnePermission
             var result = await _repository.GetByIdAsync(request.Id);
             if (result == null)
             {
-                return Result.Failure<PermissionDto>(Error.Notfound);
+                return Result.Failure<PermissionDto>(Error.Notfound("Permission"));
             }
             var mappedResult = _mapper.Map<PermissionDto>(result);
             return Result.Success(mappedResult);

@@ -36,11 +36,12 @@ namespace BlogV3.Domain.Entities
             return post;
         }
 
-        public Post Update(Guid categoryId, string title, string description, DateTime updatedOn, Guid updatedById)
+        public Post Update(Guid categoryId, string title, string description, DateTime updatedOn, Guid updatedById, string imgPath = "")
         {
             CategoryId = categoryId;
             Title = title;
             Description = description;
+            ImgPath = imgPath;
             SetUpdated(updatedById, updatedOn);
             return this;
         }

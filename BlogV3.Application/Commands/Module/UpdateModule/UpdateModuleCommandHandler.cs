@@ -22,7 +22,7 @@ namespace BlogV3.Application.Commands.Module.UpdateModule
             var exists = await _repository.ExistsAsync(request.Id);
             if (!exists)
             {
-                return Result.Failure(Error.Notfound);
+                return Result.Failure(Error.Notfound("Category"));
             }
             var validationResult = await _validator.ValidateAsync(request);
 

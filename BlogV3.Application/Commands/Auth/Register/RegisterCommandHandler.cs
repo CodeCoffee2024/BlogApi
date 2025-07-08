@@ -29,7 +29,7 @@ namespace BlogV3.Application.Commands.Auth.Register
             {
                 validationResult.Errors.Add(new ValidationFailure("Email", "Email already exists."));
             }
-            if (await _repository.UsernameExists(request.Email))
+            if (await _repository.UsernameExists(request.UserName))
             {
                 validationResult.Errors.Add(new ValidationFailure("Username", "Username already exists."));
             }

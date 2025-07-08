@@ -24,7 +24,7 @@ namespace BlogV3.Application.Commands.Permission.UpdatePermission
             var exists = await _repository.ExistsAsync(request.Id);
             if (!exists)
             {
-                return Result.Failure(Error.Notfound);
+                return Result.Failure(Error.Notfound("Permission"));
             }
             var validationResult = await _validator.ValidateAsync(request);
             var moduleId = await _moduleRepository.GetByIdAsync(request.ModuleId);

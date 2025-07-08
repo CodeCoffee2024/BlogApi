@@ -23,7 +23,7 @@ namespace BlogV3.Application.Commands.User.DeleteUser
             }
             else
             {
-                return Result.Failure(Error.Notfound);
+                return Result.Failure(Error.Notfound("User"));
             }
         }
 

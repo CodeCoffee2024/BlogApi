@@ -22,7 +22,7 @@ namespace BlogV3.Application.Commands.Role.UpdateRole
             var exists = await _repository.ExistsAsync(request.Id);
             if (!exists)
             {
-                return Result.Failure(Error.Notfound);
+                return Result.Failure(Error.Notfound("Role"));
             }
             var validationResult = await _validator.ValidateAsync(request);
 

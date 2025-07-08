@@ -15,7 +15,7 @@ namespace BlogV3.Application.Queries.Tag.GetOneTag
             var result = await _repository.GetByIdAsync(request.Id);
             if (result == null)
             {
-                return Result.Failure<TagDto>(Error.Notfound);
+                return Result.Failure<TagDto>(Error.Notfound("Tag"));
             }
             var mappedResult = _mapper.Map<TagDto>(result);
             return Result.Success(mappedResult);

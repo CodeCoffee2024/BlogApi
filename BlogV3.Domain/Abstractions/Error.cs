@@ -7,6 +7,7 @@
         public static readonly Error DuplicateEntity = new("DuplicateEntityException", "Entity with same fields already exists");
         public static readonly Error NullValue = new("Error.NullValue", "Null value was provided");
         public static readonly Error Validation = new("ValidationException", "One or more values has failed");
-        public static readonly Error Notfound = new("NofFoundException", "Entity or item not found");
+        public static Error Notfound(string entity) => new($"{entity}.NotFound", entity + " not found.");
+        public static Error Invalid(string entity, string message) => new($"{entity}.Invalid", message);
     }
 }

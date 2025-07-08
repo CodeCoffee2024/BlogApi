@@ -14,6 +14,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
+var origin = builder.Configuration.GetValue<string>("Config:CORSOriginPath");
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular",
+        policy => policy
+            .WithOrigins(origin) // Angular URL
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials()); // If using cookies/auth
+});
 builder.Services.AddControllers();
 builder.Services.AddApplication();
 builder.Services.AddEndpointsApiExplorer();
@@ -89,6 +99,7 @@ app.UseSerilogRequestLogging();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
+    app.UseCors("AllowAngular"); // Apply CORS policy
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "Blog API V1");

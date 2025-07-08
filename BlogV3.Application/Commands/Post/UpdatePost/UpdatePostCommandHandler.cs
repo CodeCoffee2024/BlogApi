@@ -23,7 +23,7 @@ namespace BlogV3.Application.Commands.Post.UpdatePost
             var exists = await _repository.ExistsAsync(request.Id);
             if (!exists)
             {
-                return Result.Failure(Error.Notfound);
+                return Result.Failure(Error.Notfound("Post"));
             }
             var validationResult = await _validator.ValidateAsync(request);
 

@@ -15,7 +15,7 @@ namespace BlogV3.Application.Queries.Role.GetOneRole
             var result = await _repository.GetByIdAsync(request.Id);
             if (result == null)
             {
-                return Result.Failure<RoleDto>(Error.Notfound);
+                return Result.Failure<RoleDto>(Error.Notfound("Role"));
             }
             var mappedResult = _mapper.Map<RoleDto>(result);
             return Result.Success(mappedResult);

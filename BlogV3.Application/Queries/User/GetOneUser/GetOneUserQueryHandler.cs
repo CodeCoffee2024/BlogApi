@@ -15,7 +15,7 @@ namespace BlogV3.Application.Queries.User.GetOneUser
             var result = await _repository.GetByIdAsync(request.Id);
             if (result == null)
             {
-                return Result.Failure<UserDto>(Error.Notfound);
+                return Result.Failure<UserDto>(Error.Notfound("User"));
             }
             var mappedResult = _mapper.Map<UserDto>(result);
             return Result.Success(mappedResult);

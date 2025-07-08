@@ -15,7 +15,7 @@ namespace BlogV3.Application.Queries.Module.GetOneModule
             var result = await _repository.GetByIdAsync(request.Id);
             if (result == null)
             {
-                return Result.Failure<ModuleDto>(Error.Notfound);
+                return Result.Failure<ModuleDto>(Error.Notfound("Module"));
             }
             var mappedResult = _mapper.Map<ModuleDto>(result);
             return Result.Success(mappedResult);

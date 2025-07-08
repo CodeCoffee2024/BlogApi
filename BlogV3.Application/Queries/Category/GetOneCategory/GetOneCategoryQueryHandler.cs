@@ -15,7 +15,7 @@ namespace BlogV3.Application.Queries.Category.GetOneCategory
             var result = await _repository.GetByIdAsync(request.Id);
             if (result == null)
             {
-                return Result.Failure<CategoryDto>(Error.Notfound);
+                return Result.Failure<CategoryDto>(Error.Notfound("Category"));
             }
             var mappedResult = _mapper.Map<CategoryDto>(result);
             return Result.Success(mappedResult);

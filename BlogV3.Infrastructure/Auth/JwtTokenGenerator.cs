@@ -44,7 +44,7 @@ namespace BlogV3.Infrastructure.Auth
 
             response.ExpiresAt = DateTime.UtcNow.AddMinutes(_settings.ExpirationMinutes);
             response.RefreshTokenExpiresAt = DateTime.UtcNow.AddMinutes(_settings.ExpirationMinutes * 3);
-
+            response.Email = user.Email;
             response.Token = GenerateJwtToken(claims, response.ExpiresAt);
             response.RefreshToken = GenerateJwtToken(claims, response.RefreshTokenExpiresAt);
             return new LoginResponse(response);

@@ -12,6 +12,14 @@ namespace BlogV3.Domain.Interfaces
 
         Task<Post?> GetByIdAsync(Guid id);
 
+        Task<IEnumerable<Post>> GetTop4();
+
+        Task<IEnumerable<Post>> GetHighlights();
+
+        Task<IEnumerable<Post>> GetTop2();
+
+        Task<IEnumerable<Post>> GetLatest();
+
         Task AddAsync(Post post);
 
         void Update(Post post);

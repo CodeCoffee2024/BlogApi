@@ -20,7 +20,7 @@ namespace BlogV3.Domain.Interfaces
 
         Task<User?> GetByIdAsync(Guid id);
 
-        Task<User?> EmailUsernameExists(string email, string username);
+        Task<User?> EmailUsernameExists(string usernameEmail);
 
         Task<User?> GetByEmailAsync(string email);
 

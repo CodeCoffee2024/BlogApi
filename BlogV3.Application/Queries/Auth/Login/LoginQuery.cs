@@ -3,19 +3,17 @@ using MediatR;
 
 namespace BlogV3.Application.Queries.Auth.Login
 {
-    public class LoginQuery : IRequest<Result<LoginResponse>>
+    public class LoginQuery : IRequest<Result>
     {
         #region Public Constructors
 
-        public LoginQuery(string email, string username, string password)
+        public LoginQuery(string usernameEmail, string password)
         {
-            Email = email;
-            Username = username;
+            UsernameEmail = usernameEmail;
             Password = password;
         }
 
-        public string? Username { get; set; }
-        public string? Email { get; set; }
+        public string? UsernameEmail { get; set; }
         public string? Password { get; set; }
 
         #endregion Public Constructors

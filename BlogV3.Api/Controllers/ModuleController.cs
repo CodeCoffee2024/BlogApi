@@ -29,7 +29,7 @@ namespace BlogV3.Api.Controllers
         {
             var query = request.ToQuery();
             var result = await _sender.Send(query, cancellationToken);
-            return Ok(result);
+            return HandleResponse(result);
         }
 
         [HttpDelete("{id}")]
@@ -38,7 +38,7 @@ namespace BlogV3.Api.Controllers
         {
             var command = new DeleteModuleCommand(id);
             var result = await _sender.Send(command, cancellationToken);
-            return Ok(result);
+            return HandleResponse(result);
         }
 
         [HttpPost]
@@ -47,7 +47,7 @@ namespace BlogV3.Api.Controllers
         {
             var command = request.SetAddCommand(UserId);
             var result = await _sender.Send(command, cancellationToken);
-            return Ok(result);
+            return HandleResponse(result);
         }
 
         [HttpPut]
@@ -56,7 +56,7 @@ namespace BlogV3.Api.Controllers
         {
             var command = request.SetUpdateCommand(UserId, request.Id);
             var result = await _sender.Send(command, cancellationToken);
-            return Ok(result);
+            return HandleResponse(result);
         }
 
         [HttpGet("{id}")]
@@ -65,7 +65,7 @@ namespace BlogV3.Api.Controllers
         {
             var command = new GetOneModuleQuery(id);
             var result = await _sender.Send(command, cancellationToken);
-            return Ok(result);
+            return HandleResponse(result);
         }
 
         #endregion Public Methods

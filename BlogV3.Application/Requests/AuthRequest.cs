@@ -9,7 +9,7 @@ namespace BlogV3.Application.Requests
         public string? Email { get; set; } = default!;
         public string? FullName { get; set; } = default!;
         public string? Password { get; set; } = default!;
-        public string? Username { get; set; } = default!;
+        public string? UsernameEmail { get; set; } = default!;
         public string? Token { get; set; } = default!;
         public DateTime? ExpiresAt { get; set; }
 
@@ -17,7 +17,7 @@ namespace BlogV3.Application.Requests
 
         #region Public Methods
 
-        public LoginQuery LoginQuery() => new(Email, Username, Password);
+        public LoginQuery LoginQuery() => new(UsernameEmail!, Password!);
 
         #endregion Public Methods
     }
