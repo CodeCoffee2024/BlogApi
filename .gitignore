@@ -11,3 +11,5 @@
 # Exclude appsettings files
 appsettings.json
 appsettings.*.json
+
+wwwroot/
