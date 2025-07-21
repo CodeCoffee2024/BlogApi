@@ -26,7 +26,7 @@ namespace BlogV3.Application.Commands.Module.CreateModule
                 return Result.Failure<List<ModuleDto>>(Error.Validation, validationResult.ToErrorList());
             }
 
-            var entity = BlogV3.Domain.Entities.Module.Create(request.Name, request.UserId);
+            var entity = BlogV3.Domain.Entities.Module.Create(request.Name, request.Link, request.UserId);
             await _repository.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
             return Result.Success(_mappper.Map<ModuleDto>(entity));

@@ -3,5 +3,5 @@ using MediatR;
 
 namespace BlogV3.Application.Commands.Module.CreateModule
 {
-    public sealed record CreateModuleCommand(Guid UserId, string Name) : IRequest<Result>;
+    public sealed record CreateModuleCommand(Guid UserId, string Name, string Link) : IRequest<Result>;
 }

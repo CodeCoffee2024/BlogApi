@@ -24,6 +24,13 @@ namespace BlogV3.Infrastructure.Repositories
             return await _context.Set<Module>().AnyAsync(it => it.Name == name);
         }
 
+        public async Task<List<Module>> GetByModuleNames(IEnumerable<string> names)
+        {
+            return await _context.Modules
+                .Where(m => names.Contains(m.Name) && m.IsSystemGenerated)
+                .ToListAsync();
+        }
+
         #endregion Public Constructors
     }
 }

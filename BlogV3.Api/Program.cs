@@ -1,4 +1,3 @@
-using System.Text;
 using BlogV3.Application;
 using BlogV3.Application.Interfaces.Common;
 using BlogV3.Common.Entities;
@@ -9,17 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddInfrastructure(builder.Configuration);
-
-var origin = builder.Configuration.GetValue<string>("Config:CORSOriginPath");
+var origins = builder.Configuration["Config:CORSOriginPath"]
+    ?.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngular",
         policy => policy
-            .WithOrigins(origin) // Angular URL
+            .WithOrigins(origins!)
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials()); // If using cookies/auth

@@ -21,6 +21,8 @@ namespace BlogV3.Domain.Interfaces
 
         Task<PageResult<Module>> GetPaginatedPostsAsync(int page, int pageSize, string? search, string orderBy);
 
+        Task<List<Module>> GetByModuleNames(IEnumerable<string> names);
+
         #endregion Public Methods
     }
 }

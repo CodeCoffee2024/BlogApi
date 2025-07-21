@@ -11,16 +11,17 @@ namespace BlogV3.Application.Requests
 
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string Link { get; set; } = string.Empty;
 
         #endregion Properties
 
         #region Public Methods
 
         public CreateModuleCommand SetAddCommand(Guid UserId) =>
-            new(UserId, Name);
+            new(UserId, Name, Link);
 
         public UpdateModuleCommand SetUpdateCommand(Guid UserId, Guid Id) =>
-            new(UserId, Id, Name);
+            new(UserId, Id, Name, Link);
 
         public GetModuleListQuery ToQuery() => new(Search, OrderBy, PageNumber, PageSize);
 

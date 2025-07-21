@@ -25,15 +25,18 @@ namespace BlogV3.Infrastructure.Data
 
                 // Create module
                 Module[] modules = [
-                    Module.Create("Modules", admin.Id!.Value),
-                    Module.Create("Posts", admin.Id!.Value),
-                    Module.Create("Categories", admin.Id!.Value),
-                    Module.Create("Users", admin.Id!.Value)
+                    Module.Create("Modules", "/modules", admin.Id!.Value),
+                    Module.Create("Posts", "/posts", admin.Id!.Value),
+                    Module.Create("Categories", "/categories", admin.Id!.Value),
+                    Module.Create("Users", "/users", admin.Id!.Value),
+                    Module.Create("Dashboard", "/", admin.Id!.Value)
                 ];
                 var module = modules[0];
                 var post = modules[1];
                 var category = modules[2];
                 var user = modules[3];
+                var dashboard = modules[4];
+                dashboard.FlagAsSystemGenerated();
                 // Add permissions module
                 var viewPermissionModule = module.AddPermission("View");
                 var editPermissionModule = module.AddPermission("Modify");

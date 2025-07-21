@@ -22,7 +22,7 @@ namespace BlogV3.Application.Commands.Module.UpdateModule
             var exists = await _repository.ExistsAsync(request.Id);
             if (!exists)
             {
-                return Result.Failure(Error.Notfound("Category"));
+                return Result.Failure(Error.Notfound("Module"));
             }
             var validationResult = await _validator.ValidateAsync(request);
 
@@ -38,6 +38,7 @@ namespace BlogV3.Application.Commands.Module.UpdateModule
             }
             entity!.Update(
                 request.Name,
+                request.Link,
                 request.UserId,
                 DateTime.Now
             );

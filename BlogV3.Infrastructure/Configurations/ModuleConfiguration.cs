@@ -17,6 +17,9 @@ namespace BlogV3.Infrastructure.Configurations
             builder.Property(m => m.Name)
                 .IsRequired()
                 .HasMaxLength(100);
+            builder.Property(m => m.Link)
+                .IsRequired()
+                .HasMaxLength(100);
 
             builder.HasMany(m => m.Permissions)
                    .WithOne(p => p.Module)

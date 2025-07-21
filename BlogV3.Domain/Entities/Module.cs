@@ -5,25 +5,27 @@ namespace BlogV3.Domain.Entities
     public record class Module : AuditableEntity
     {
         public string Name { get; private set; } = string.Empty;
+        public string Link { get; private set; } = string.Empty;
         public bool IsSystemGenerated { get; private set; } = false;
         public virtual ICollection<Permission> Permissions { get; private set; } = new List<Permission>();
         protected Module() { }
 
-        public Module(string name)
+        public Module(string name, string link)
         {
             Name = name;
         }
 
-        public static Module Create(string name, Guid createdById)
+        public static Module Create(string name, string link, Guid createdById)
         {
-            var module = new Module(name);
+            var module = new Module(name, link);
             module.SetCreated(createdById, DateTime.Now);
             return module;
         }
         public void FlagAsSystemGenerated() => IsSystemGenerated = true;
-        public Module Update(string name, Guid updatedById, DateTime updatedOn)
+        public Module Update(string name, string link, Guid updatedById, DateTime updatedOn)
         {
             Name = name;
+            Link = link;
             SetUpdated(updatedById, updatedOn);
             return this;
         }
