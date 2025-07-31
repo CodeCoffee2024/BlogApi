@@ -2,18 +2,34 @@
 
 namespace BlogV3.Domain.Entities
 {
-    public record class Tag : BaseEntity
+    public class Tag : BaseEntity
     {
-        public virtual Post? Post { get; private set; }
-        public Guid PostId { get; private set; }
-        public string Name { get; private set; } = string.Empty;
+        #region Protected Constructors
 
-        protected Tag() { }
+        protected Tag()
+        { }
+
+        #endregion Protected Constructors
+
+        #region Private Constructors
+
         private Tag(Guid postId, string name)
         {
             PostId = postId;
             Name = name;
         }
+
+        #endregion Private Constructors
+
+        #region Properties
+
+        public virtual Post? Post { get; private set; }
+        public Guid PostId { get; private set; }
+        public string Name { get; private set; } = string.Empty;
+
+        #endregion Properties
+
+        #region Public Methods
 
         public static Tag Create(Guid postId, string name)
         {
@@ -26,5 +42,7 @@ namespace BlogV3.Domain.Entities
             Name = name;
             return this;
         }
+
+        #endregion Public Methods
     }
 }

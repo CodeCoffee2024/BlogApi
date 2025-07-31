@@ -2,9 +2,12 @@
 
 namespace BlogV3.Domain.Entities
 {
-    public record class Post : AuditableEntity
+    public class Post : AuditableEntity
     {
         #region Properties
+
+        protected Post()
+        { }
 
         public Guid CategoryId { get; private set; }
         public virtual Category? Category { get; init; }
@@ -13,8 +16,6 @@ namespace BlogV3.Domain.Entities
         public string Description { get; private set; } = string.Empty;
         public virtual ICollection<Tag>? Tags { get; set; }
         public string ImgPath { get; private set; } = string.Empty;
-
-        protected Post() { }
 
         #endregion Properties
 

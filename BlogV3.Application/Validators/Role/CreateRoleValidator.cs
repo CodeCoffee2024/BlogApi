@@ -16,6 +16,8 @@ namespace BlogV3.Application.Validators.Role
                 .MustAsync(async (name, cancellation) =>
                     !(await roleRepository.ExistsByNameAsync(name)))
                 .WithMessage("Name already exist.");
+            RuleFor(x => x.Permissions)
+                .NotEmpty().WithMessage("Atleast 1 permission is required.");
         }
 
         #endregion Public Constructors

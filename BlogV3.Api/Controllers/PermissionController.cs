@@ -1,6 +1,7 @@
 ﻿using BlogV3.Api.Attributes;
 using BlogV3.Api.Shared;
 using BlogV3.Application.Commands.Permission.DeletePermission;
+using BlogV3.Application.Queries.Permission.GetAllPermission;
 using BlogV3.Application.Queries.Permission.GetOnePermission;
 using BlogV3.Application.Requests;
 using BlogV3.Common.Constants;
@@ -29,6 +30,15 @@ namespace BlogV3.Api.Controllers
         {
             var query = request.ToQuery();
             var result = await _sender.Send(query, cancellationToken);
+            return HandleResponse(result);
+        }
+
+        [HttpGet("GetAll")]
+        [PermissionAuthorize(Modules.PERMISSION, Permissions.VIEW)]
+        public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+        {
+            var command = new GetAllPermissionQuery();
+            var result = await _sender.Send(command, cancellationToken);
             return HandleResponse(result);
         }
 

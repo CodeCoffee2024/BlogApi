@@ -1,5 +1,5 @@
 ﻿using BlogV3.Api.Shared;
-using BlogV3.Application.Queries.ModuleGroup.GetModuleGroupList;
+using BlogV3.Application.Queries.System.ModuleGroup.GetModuleGroupList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

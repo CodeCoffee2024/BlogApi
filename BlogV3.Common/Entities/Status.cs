@@ -15,5 +15,8 @@ namespace BlogV3.Common.Entities
 
         [Description("")]
         None,
+
+        [Description("")]
+        All,
     }
 }

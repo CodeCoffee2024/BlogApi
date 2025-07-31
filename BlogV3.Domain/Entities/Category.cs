@@ -2,7 +2,7 @@
 
 namespace BlogV3.Domain.Entities
 {
-    public record class Category : AuditableEntity
+    public class Category : AuditableEntity
     {
         #region Properties
 
@@ -15,7 +15,9 @@ namespace BlogV3.Domain.Entities
 
         #region Private Constructors
 
-        protected Category() { }
+        protected Category()
+        { }
+
         private Category(string name, string status)
         {
             Name = name;
@@ -36,6 +38,7 @@ namespace BlogV3.Domain.Entities
             SetUpdated(updatedById, updatedOn);
             return this;
         }
+
         public void FlagAsSystemGenerated() => IsSystemGenerated = true;
 
         #endregion Private Constructors

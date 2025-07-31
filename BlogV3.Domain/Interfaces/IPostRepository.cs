@@ -1,6 +1,6 @@
-﻿using System.Linq.Expressions;
-using BlogV3.Domain.Abstractions;
+﻿using BlogV3.Domain.Abstractions;
 using BlogV3.Domain.Entities;
+using System.Linq.Expressions;
 
 namespace BlogV3.Domain.Interfaces
 {

@@ -11,18 +11,20 @@ namespace BlogV3.Application.Requests
 
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public string? Status { get; set; } = string.Empty;
+        public List<Guid> Permissions { get; set; } = new List<Guid>();
 
         #endregion Properties
 
         #region Public Methods
 
         public CreateRoleCommand SetAddCommand(Guid UserId) =>
-            new(Name, UserId);
+            new(Name, UserId, Permissions);
 
         public UpdateRoleCommand SetUpdateCommand(Guid Id, Guid UserId) =>
-            new(UserId, Id, Name);
+            new(UserId, Id, Name, Permissions);
 
-        public GetRoleListQuery ToQuery() => new(Search, OrderBy, PageNumber, PageSize);
+        public GetRoleListQuery ToQuery() => new(Search, OrderBy, PageNumber, PageSize, Status);
 
         #endregion Public Methods
     }

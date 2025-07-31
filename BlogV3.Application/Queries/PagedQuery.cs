@@ -21,6 +21,7 @@
         }
 
         public string? Search { get; set; }
+        public string? Status { get; set; }
         public string? OrderBy { get; set; }
 
         #endregion Properties

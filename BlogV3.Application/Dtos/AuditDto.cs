@@ -1,12 +1,13 @@
 ﻿namespace BlogV3.Application.Dtos
 {
-    public class AuditDto
+    public record AuditDto
     {
         #region Properties
 
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-        public UserDto? CreatedBy { get; private set; }
+        public object? CreatedByUser { get; set; }
+        public object? UpdatedByUser { get; set; }
 
         #endregion Properties
     }

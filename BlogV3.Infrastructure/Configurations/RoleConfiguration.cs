@@ -1,4 +1,6 @@
-﻿using BlogV3.Domain.Entities;
+﻿using BlogV3.Application.Extensions;
+using BlogV3.Common.Entities;
+using BlogV3.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,6 +19,10 @@ namespace BlogV3.Infrastructure.Configurations
             builder.Property(r => r.Name)
                 .IsRequired()
                 .HasMaxLength(50);
+            builder.Property(r => r.Status)
+                .IsRequired()
+                .HasMaxLength(5)
+                .HasDefaultValue(Status.Active.GetDescription());
 
             builder.HasMany(r => r.UserRoles)
                    .WithOne(ur => ur.Role)

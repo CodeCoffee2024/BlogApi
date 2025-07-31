@@ -2,7 +2,7 @@
 
 namespace BlogV3.Domain.Abstractions
 {
-    public abstract record class AuditableEntity : BaseEntity
+    public abstract class AuditableEntity : BaseEntity
     {
         #region Properties
 
@@ -13,13 +13,38 @@ namespace BlogV3.Domain.Abstractions
         public Guid? CreatedById { get; private set; }
         public Guid? UpdatedById { get; private set; }
 
+        public object? CreatedByUser()
+        {
+            return CreatedBy != null
+                ? new
+                {
+                    firstName = CreatedBy.FirstName,
+                    lastName = CreatedBy.LastName
+                }
+                : null;
+        }
+
+        public object? UpdatedByUser()
+        {
+            return UpdatedBy != null
+                ? new
+                {
+                    firstName = UpdatedBy.FirstName,
+                    lastName = UpdatedBy.LastName
+                }
+                : null;
+        }
+
         #endregion Properties
+
+        #region Protected Methods
 
         protected void SetUpdated(Guid updatedById, DateTime updatedOn)
         {
             UpdatedById = updatedById;
             UpdatedOn = updatedOn;
         }
+
         protected void SetCreated(Guid createdById, DateTime createdOn)
         {
             CreatedById = createdById;
@@ -27,5 +52,7 @@ namespace BlogV3.Domain.Abstractions
             UpdatedById = createdById;
             UpdatedOn = createdOn;
         }
+
+        #endregion Protected Methods
     }
 }

@@ -2,18 +2,34 @@
 
 namespace BlogV3.Domain.Entities
 {
-    public record class Module : AuditableEntity
+    public class Module : AuditableEntity
     {
-        public string Name { get; private set; } = string.Empty;
-        public string Link { get; private set; } = string.Empty;
-        public bool IsSystemGenerated { get; private set; } = false;
-        public virtual ICollection<Permission> Permissions { get; private set; } = new List<Permission>();
-        protected Module() { }
+        #region Public Constructors
 
         public Module(string name, string link)
         {
             Name = name;
         }
+
+        #endregion Public Constructors
+
+        #region Protected Constructors
+
+        protected Module()
+        { }
+
+        #endregion Protected Constructors
+
+        #region Properties
+
+        public string Name { get; private set; } = string.Empty;
+        public string Link { get; private set; } = string.Empty;
+        public bool IsSystemGenerated { get; private set; } = false;
+        public virtual ICollection<Permission> Permissions { get; private set; } = new List<Permission>();
+
+        #endregion Properties
+
+        #region Public Methods
 
         public static Module Create(string name, string link, Guid createdById)
         {
@@ -21,7 +37,9 @@ namespace BlogV3.Domain.Entities
             module.SetCreated(createdById, DateTime.Now);
             return module;
         }
+
         public void FlagAsSystemGenerated() => IsSystemGenerated = true;
+
         public Module Update(string name, string link, Guid updatedById, DateTime updatedOn)
         {
             Name = name;
@@ -36,5 +54,7 @@ namespace BlogV3.Domain.Entities
             Permissions.Add(permission);
             return permission;
         }
+
+        #endregion Public Methods
     }
 }

@@ -6,5 +6,6 @@ namespace BlogV3.Application.Commands.Role.UpdateRole
     public sealed record UpdateRoleCommand(
         Guid UserId,
         Guid Id,
-        string Name) : IRequest<Result>;
+        string Name,
+        IEnumerable<Guid> Permissions) : IRequest<Result>;
 }

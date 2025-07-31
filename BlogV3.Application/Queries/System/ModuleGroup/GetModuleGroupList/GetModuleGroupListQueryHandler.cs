@@ -3,7 +3,7 @@ using BlogV3.Application.Interfaces.Services;
 using BlogV3.Domain.Abstractions;
 using MediatR;
 
-namespace BlogV3.Application.Queries.ModuleGroup.GetModuleGroupList
+namespace BlogV3.Application.Queries.System.ModuleGroup.GetModuleGroupList
 {
     public class GetModuleGroupListQueryHandler(
         IModuleGroupService _moduleGroupService

@@ -1,6 +1,6 @@
 ﻿namespace BlogV3.Domain.Abstractions
 {
-    public abstract record class BaseEntity
+    public abstract class BaseEntity
     {
         #region Properties
 

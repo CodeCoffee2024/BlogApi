@@ -1,5 +1,6 @@
 ﻿using BlogV3.Domain.Abstractions;
 using BlogV3.Domain.Entities;
+using System.Linq.Expressions;
 
 namespace BlogV3.Domain.Interfaces
 {
@@ -13,13 +14,15 @@ namespace BlogV3.Domain.Interfaces
 
         Task<Role?> GetByIdAsync(Guid id);
 
+        Task<Role?> GetByNameAsync(string name);
+
         Task AddAsync(Role post);
 
         void Update(Role post);
 
         void Remove(Role tag);
 
-        Task<PageResult<Role>> GetPaginatedRolesAsync(int page, int pageSize, string? search, string orderBy);
+        Task<PageResult<Role>> GetPaginatedRolesAsync(int page, int pageSize, string? search, string orderBy, Expression<Func<Role, bool>>? statusFilter);
 
         #endregion Public Methods
     }

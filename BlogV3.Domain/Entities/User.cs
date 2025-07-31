@@ -2,7 +2,7 @@
 
 namespace BlogV3.Domain.Entities
 {
-    public record class User : AuditableEntity
+    public class User : AuditableEntity
     {
         #region Properties
 
@@ -21,7 +21,9 @@ namespace BlogV3.Domain.Entities
 
         #region Private Constructors
 
-        protected User() { }
+        protected User()
+        { }
+
         private User(string userName, string email, string password, string status, string firstName, string lastName, string middleName)
         {
             UserName = userName;
@@ -33,8 +35,6 @@ namespace BlogV3.Domain.Entities
             MiddleName = middleName;
         }
 
-        public void FlagAsSystemGenerated() => IsSystemGenerated = true;
-
         public static User Create(string userName, string email, string password, string status, string firstName, string lastName, string middleName, DateTime createdOn, Guid createdById, bool isSeed = false)
         {
             User user = new User(userName, email, password, status, firstName, lastName, middleName);
@@ -44,6 +44,7 @@ namespace BlogV3.Domain.Entities
             }
             return user;
         }
+
         public static User Register(string userName, string email, string password, string status, string firstName, string lastName, string middleName)
         {
             User user = new User(userName, email, password, status, firstName, lastName, middleName);
@@ -56,6 +57,8 @@ namespace BlogV3.Domain.Entities
             return user;
         }
 
+        public void FlagAsSystemGenerated() => IsSystemGenerated = true;
+
         public User Update(string userName, string email, string password, string firstName, string lastName, string middleName, DateTime updatedOn, Guid updatedById)
         {
             UserName = userName;
@@ -67,6 +70,7 @@ namespace BlogV3.Domain.Entities
             SetUpdated(updatedById, updatedOn);
             return this;
         }
+
         public void AssignRole(Role role)
         {
             UserRoles.Add(new UserRole { User = this, Role = role });

@@ -1,6 +1,6 @@
 ﻿namespace BlogV3.Application.Dtos
 {
-    public class PostDto : AuditDto
+    public record PostDto : AuditDto
     {
         #region Properties
 

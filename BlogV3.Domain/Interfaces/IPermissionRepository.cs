@@ -17,6 +17,8 @@ namespace BlogV3.Domain.Interfaces
 
         Task AddAsync(Permission post);
 
+        Task<IEnumerable<Permission>> GetAllAsync();
+
         void Update(Permission post);
 
         void Remove(Permission tag);

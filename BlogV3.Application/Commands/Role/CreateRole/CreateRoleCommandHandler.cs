@@ -11,6 +11,7 @@ namespace BlogV3.Application.Commands.Role.CreateRole
     internal sealed class CreateRoleCommandHandler(
         IRoleRepository _repository,
         IMapper _mappper,
+        IPermissionRepository _permissionRepository,
         IValidator<CreateRoleCommand> _validator,
         IUnitOfWork _unitOfWork
     ) : IRequestHandler<CreateRoleCommand, Result>
@@ -26,6 +27,11 @@ namespace BlogV3.Application.Commands.Role.CreateRole
             }
 
             var entity = BlogV3.Domain.Entities.Role.Create(request.Name, request.UserId);
+            foreach (Guid id in request.Permissions)
+            {
+                var permission = await _permissionRepository.GetByIdAsync(id);
+                entity.AddPermission(permission!);
+            }
             await _repository.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
             return Result.Success(_mappper.Map<RoleDto>(entity));
