@@ -19,7 +19,7 @@ namespace BlogV3.Application.Requests
         public string Email { get; set; } = string.Empty;
         public string UserName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public string Status { get; set; } = "activ";
+        public string? Status { get; set; } = "activ";
 
         #endregion Properties
 

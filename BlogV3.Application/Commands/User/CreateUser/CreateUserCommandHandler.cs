@@ -29,9 +29,9 @@ namespace BlogV3.Application.Commands.User.CreateUser
             {
                 validationResult.Errors.Add(new ValidationFailure("Email", "Email already exists."));
             }
-            if (await _repository.UsernameExists(request.Email))
+            if (await _repository.UsernameExists(request.UserName))
             {
-                validationResult.Errors.Add(new ValidationFailure("Username", "Username already exists."));
+                validationResult.Errors.Add(new ValidationFailure("UserName", "Username already exists."));
             }
 
             if (!validationResult.IsValid)

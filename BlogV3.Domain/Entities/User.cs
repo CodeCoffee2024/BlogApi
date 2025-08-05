@@ -1,4 +1,5 @@
-﻿using BlogV3.Domain.Abstractions;
+﻿using BlogV3.Common.Entities;
+using BlogV3.Domain.Abstractions;
 
 namespace BlogV3.Domain.Entities
 {
@@ -34,6 +35,13 @@ namespace BlogV3.Domain.Entities
             LastName = lastName;
             MiddleName = middleName;
         }
+
+        public static IEnumerable<Status> Statuses => new[]
+                        {
+            BlogV3.Common.Entities.Status.All,
+            BlogV3.Common.Entities.Status.Active,
+            BlogV3.Common.Entities.Status.Inactive,
+        };
 
         public static User Create(string userName, string email, string password, string status, string firstName, string lastName, string middleName, DateTime createdOn, Guid createdById, bool isSeed = false)
         {

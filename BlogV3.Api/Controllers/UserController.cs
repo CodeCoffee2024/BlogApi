@@ -1,6 +1,7 @@
 ﻿using BlogV3.Api.Attributes;
 using BlogV3.Api.Shared;
 using BlogV3.Application.Commands.User.DeleteUser;
+using BlogV3.Application.Queries.Role.GetRoleStatuses;
 using BlogV3.Application.Queries.User.GetOneUser;
 using BlogV3.Application.Requests;
 using BlogV3.Common.Constants;
@@ -34,6 +35,14 @@ namespace BlogV3.Api.Controllers
             return HandleResponse(result);
         }
 
+        [HttpGet("GetStatuses")]
+        [PermissionAuthorize(Modules.USER, Permissions.VIEW)]
+        public async Task<IActionResult> GetStatuses()
+        {
+            var result = await _sender.Send(new GetRoleStatusesQuery());
+            return HandleResponse(result);
+        }
+
         [HttpDelete("{id}")]
         [PermissionAuthorize(Modules.USER, Permissions.MODIFY)]
         public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
@@ -62,7 +71,7 @@ namespace BlogV3.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        [PermissionAuthorize(Modules.POST, Permissions.VIEW)]
+        [PermissionAuthorize(Modules.USER, Permissions.VIEW)]
         public async Task<IActionResult> Get([FromRoute] Guid id, CancellationToken cancellationToken)
         {
             var command = new GetOneUserQuery(id);

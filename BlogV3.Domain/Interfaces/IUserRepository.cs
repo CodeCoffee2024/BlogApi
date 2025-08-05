@@ -26,9 +26,11 @@ namespace BlogV3.Domain.Interfaces
 
         Task<User?> GetByUsernameAsync(string username);
 
-        void Remove(User tag);
+        void Remove(User user);
 
-        Task AddAsync(User tag);
+        Task AddAsync(User user);
+
+        void Update(User user);
 
         Task<PageResult<User>> GetPaginatedUsersAsync(int page, int pageSize, string? search, string orderBy, Expression<Func<User, bool>>? statusFilter);
 

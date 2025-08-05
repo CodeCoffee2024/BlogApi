@@ -23,10 +23,6 @@ namespace BlogV3.Application.Validators.User
 
             RuleFor(x => x.UserName)
                 .NotEmpty().WithMessage("Username is required.");
-
-            RuleFor(x => x.Password)
-                .NotEmpty().WithMessage("Password is required.")
-                .MinimumLength(6).WithMessage("Password length must be atleast 6 characters.");
         }
 
         #endregion Public Constructors

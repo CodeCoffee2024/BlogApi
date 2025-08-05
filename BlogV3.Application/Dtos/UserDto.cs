@@ -1,9 +1,10 @@
 ﻿namespace BlogV3.Application.Dtos
 {
-    public class UserDto
+    public record UserDto : AuditDto
     {
         #region Properties
 
+        public Guid id { get; set; }
         public string UserName { get; private set; } = string.Empty;
         public string Email { get; private set; } = string.Empty;
         public string Status { get; private set; } = string.Empty;
