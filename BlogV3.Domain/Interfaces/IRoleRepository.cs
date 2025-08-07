@@ -14,6 +14,10 @@ namespace BlogV3.Domain.Interfaces
 
         Task<Role?> GetByIdAsync(Guid id);
 
+        Task<IEnumerable<Role>> GetUserRolesAsync();
+
+        Task<IEnumerable<Role>> GetUserRolesByUserIdAsync(Guid userId);
+
         Task<Role?> GetByNameAsync(string name);
 
         Task AddAsync(Role post);

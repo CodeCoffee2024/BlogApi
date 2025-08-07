@@ -16,6 +16,7 @@ namespace BlogV3.Application.Queries.Auth.Login
         public async Task<Result> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
             var user = await _repository.EmailUsernameExists(request.UsernameEmail!);
+
             if (user == null)
             {
                 return Result.Failure(Error.Notfound("User"));

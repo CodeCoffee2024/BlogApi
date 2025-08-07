@@ -1,6 +1,7 @@
 ﻿using BlogV3.Application.Abstractions;
 using BlogV3.Application.Commands.Role.CreateRole;
 using BlogV3.Application.Commands.Role.UpdateRole;
+using BlogV3.Application.Commands.Role.UpdateUserRole;
 using BlogV3.Application.Queries.Role.GetRoleList;
 
 namespace BlogV3.Application.Requests
@@ -13,6 +14,7 @@ namespace BlogV3.Application.Requests
         public string Name { get; set; } = string.Empty;
         public string? Status { get; set; } = string.Empty;
         public List<Guid> Permissions { get; set; } = new List<Guid>();
+        public List<Guid> Roles { get; set; } = new List<Guid>();
 
         #endregion Properties
 
@@ -23,6 +25,9 @@ namespace BlogV3.Application.Requests
 
         public UpdateRoleCommand SetUpdateCommand(Guid Id, Guid UserId) =>
             new(UserId, Id, Name, Permissions);
+
+        public UpdateUserRoleCommand SetUpdateUserRoleCommand(Guid UserId) =>
+            new(UserId, Roles);
 
         public GetRoleListQuery ToQuery() => new(Search, OrderBy, PageNumber, PageSize, Status);
 

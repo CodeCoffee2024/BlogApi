@@ -1,9 +1,9 @@
-﻿using System.Linq.Expressions;
-using BlogV3.Domain.Abstractions;
+﻿using BlogV3.Domain.Abstractions;
 using BlogV3.Domain.Entities;
 using BlogV3.Domain.Interfaces;
 using BlogV3.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace BlogV3.Infrastructure.Repositories
 {

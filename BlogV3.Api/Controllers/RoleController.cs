@@ -3,6 +3,8 @@ using BlogV3.Api.Shared;
 using BlogV3.Application.Commands.Role.DeleteRole;
 using BlogV3.Application.Queries.Role.GetOneRole;
 using BlogV3.Application.Queries.Role.GetRoleStatuses;
+using BlogV3.Application.Queries.Role.GetUserRoles;
+using BlogV3.Application.Queries.Role.GetUserRolesByUserId;
 using BlogV3.Application.Requests;
 using BlogV3.Common.Constants;
 using MediatR;
@@ -31,6 +33,28 @@ namespace BlogV3.Api.Controllers
             var query = request.ToQuery();
             var result = await _sender.Send(query, cancellationToken);
             return HandleResponse(result);
+        }
+
+        [HttpGet("GetUserRoles")]
+        [PermissionAuthorize(Modules.ROLE, Permissions.VIEW)]
+        public async Task<IActionResult> GetUserRoles(CancellationToken cancellationToken)
+        {
+            var command = new GetUserRolesQuery();
+            var result = await _sender.Send(command, cancellationToken);
+            return HandleResponse(result);
+        }
+
+        [HttpGet("GetUserRolesByUserId/{id}")]
+        [PermissionAuthorize(Modules.ROLE, Permissions.VIEW)]
+        public async Task<IActionResult> GetUserRolesByUserId([FromRoute] string id, CancellationToken cancellationToken)
+        {
+            if (Guid.TryParse(id, out var userId))
+            {
+                var command = new GetUserRolesByUserIdQuery(userId);
+                var result = await _sender.Send(command, cancellationToken);
+                return HandleResponse(result);
+            }
+            return HandleResponse(Domain.Abstractions.Result.Failure(Domain.Abstractions.Error.NullValue));
         }
 
         [HttpGet("GetStatuses")]
@@ -64,6 +88,15 @@ namespace BlogV3.Api.Controllers
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] RoleRequest request, CancellationToken cancellationToken)
         {
             var command = request.SetUpdateCommand(id, UserId);
+            var result = await _sender.Send(command, cancellationToken);
+            return HandleResponse(result);
+        }
+
+        [HttpPut("UpdateUserRole/{userId}")]
+        [PermissionAuthorize(Modules.ROLE, Permissions.MODIFY)]
+        public async Task<IActionResult> UpdateUserRole([FromRoute] Guid userId, [FromBody] RoleRequest request, CancellationToken cancellationToken)
+        {
+            var command = request.SetUpdateUserRoleCommand(userId);
             var result = await _sender.Send(command, cancellationToken);
             return HandleResponse(result);
         }

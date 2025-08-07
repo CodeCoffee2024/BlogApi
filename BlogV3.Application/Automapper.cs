@@ -14,6 +14,7 @@ namespace BlogV3.Application
             CreateMap<Category, CategoryDto>().ReverseMap();
             CreateMap<Post, PostDto>().ReverseMap();
             CreateMap<Module, ModuleDto>().ReverseMap();
+            CreateMap<UserRoleDto, Role>().ReverseMap();
             CreateMap<User, UserDto>()
             .ForMember(dest => dest.UserRoles,
                 opt => opt.MapFrom(src => src.UserRoles.Select(ur => ur.Role)))

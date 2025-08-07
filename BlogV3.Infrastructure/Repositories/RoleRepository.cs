@@ -1,4 +1,6 @@
-﻿using BlogV3.Domain.Abstractions;
+﻿using BlogV3.Application.Extensions;
+using BlogV3.Common.Entities;
+using BlogV3.Domain.Abstractions;
 using BlogV3.Domain.Entities;
 using BlogV3.Domain.Interfaces;
 using BlogV3.Infrastructure.Data;
@@ -28,6 +30,16 @@ namespace BlogV3.Infrastructure.Repositories
         public async Task<Role?> GetByNameAsync(string name)
         {
             return await _context.Set<Role>().FirstOrDefaultAsync(it => it.Name == name);
+        }
+
+        public async Task<IEnumerable<Role>> GetUserRolesAsync()
+        {
+            return await _context.Set<Role>().Where(it => it.Status == Status.Active.GetDescription()).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Role>> GetUserRolesByUserIdAsync(Guid userId)
+        {
+            return await _context.Set<Role>().Where(it => it.Status == Status.Active.GetDescription() && it.UserRoles.Any(it => it.UserId == userId)).ToListAsync();
         }
 
         public virtual async Task<Role?> GetByIdAndPermissionsAsync(Guid id)
