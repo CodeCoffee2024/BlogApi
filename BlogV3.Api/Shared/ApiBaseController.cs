@@ -1,7 +1,7 @@
-﻿using System.Security.Claims;
-using BlogV3.Domain.Abstractions;
+﻿using BlogV3.Domain.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace BlogV3.Api.Shared
 {
@@ -33,7 +33,15 @@ namespace BlogV3.Api.Shared
         {
             if (!result.IsSuccess)
             {
-                return BadRequest(result);
+                return result.Error switch
+                {
+                    { StatusCode: StatusCodes.Status404NotFound } => NotFound(result.Error),
+                    { StatusCode: StatusCodes.Status400BadRequest } => BadRequest(result.Error),
+                    { StatusCode: StatusCodes.Status409Conflict } => Conflict(result.Error),
+                    { StatusCode: StatusCodes.Status401Unauthorized } => Unauthorized(result.Error),
+                    { StatusCode: StatusCodes.Status403Forbidden } => Forbid(),
+                    _ => StatusCode(result.Error?.StatusCode ?? StatusCodes.Status500InternalServerError, result.Error)
+                };
             }
 
             return result.Data != null ? Ok(result) : NotFound(result);

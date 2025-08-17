@@ -1,5 +1,6 @@
 ﻿using BlogV3.Domain.Abstractions;
 using FluentValidation.Results;
+using System.Net;
 
 namespace BlogV3.Application
 {
@@ -10,7 +11,7 @@ namespace BlogV3.Application
         public static List<Error> ToErrorList(this ValidationResult result)
         {
             return result.Errors
-                         .Select(e => new Error(e.PropertyName, e.ErrorMessage))
+                         .Select(e => new Error(e.PropertyName, e.ErrorMessage, ((int)HttpStatusCode.BadRequest)))
                          .ToList();
         }
 

@@ -12,6 +12,7 @@ namespace BlogV3.Application
         {
             CreateMap<Tag, TagDto>().ReverseMap();
             CreateMap<Category, CategoryDto>().ReverseMap();
+            CreateMap<Category, CategoryFragment>().ReverseMap();
             CreateMap<Post, PostDto>().ReverseMap();
             CreateMap<Module, ModuleDto>().ReverseMap();
             CreateMap<UserRoleDto, Role>().ReverseMap();

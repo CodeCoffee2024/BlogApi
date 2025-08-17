@@ -1,7 +1,8 @@
 ﻿using BlogV3.Api.Attributes;
 using BlogV3.Api.Shared;
-using BlogV3.Application.Commands.Tag.DeleteTag;
+using BlogV3.Application.Commands.Post.DeletePost;
 using BlogV3.Application.Queries.Post.GetOnePost;
+using BlogV3.Application.Queries.Post.GetPostStatuses;
 using BlogV3.Application.Requests;
 using BlogV3.Common.Constants;
 using MediatR;
@@ -38,7 +39,7 @@ namespace BlogV3.Api.Controllers
         [PermissionAuthorize(Modules.POST, Permissions.MODIFY)]
         public async Task<IActionResult> Delete([FromRoute] Guid id, CancellationToken cancellationToken)
         {
-            var command = new DeleteTagCommand(id);
+            var command = new DeletePostCommand(id);
             var result = await _sender.Send(command, cancellationToken);
             return HandleResponse(result);
         }
@@ -54,10 +55,18 @@ namespace BlogV3.Api.Controllers
 
         [HttpPut("{id}")]
         [PermissionAuthorize(Modules.POST, Permissions.MODIFY)]
-        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] PostRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromForm] PostRequest request, CancellationToken cancellationToken)
         {
             var command = request.SetUpdateCommand(UserId, id);
             var result = await _sender.Send(command, cancellationToken);
+            return HandleResponse(result);
+        }
+
+        [HttpGet("GetStatuses")]
+        [PermissionAuthorize(Modules.POST, Permissions.VIEW)]
+        public async Task<IActionResult> GetStatuses()
+        {
+            var result = await _sender.Send(new GetPostStatusesQuery());
             return HandleResponse(result);
         }
 

@@ -1,9 +1,10 @@
-﻿using BlogV3.Domain.Abstractions;
+﻿using BlogV3.Application.Dtos;
+using BlogV3.Domain.Abstractions;
 using MediatR;
 
 namespace BlogV3.Application.Queries.Role.GetRoleList
 {
-    public class GetRoleListQuery : PagedQuery, IRequest<Result<PageResult<GetRoleListResponse>>>
+    public class GetRoleListQuery : PagedQuery, IRequest<Result<PageResult<RoleDto>>>
     {
         #region Public Constructors
 

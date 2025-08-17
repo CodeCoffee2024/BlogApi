@@ -40,9 +40,9 @@ namespace BlogV3.Application.Commands.Post.CreatePost
                 imgPath
             );
             await _repository.AddAsync(entity);
-            foreach (TagDto tag in request.Tags)
+            foreach (string tag in request.Tags)
             {
-                var tagEntity = BlogV3.Domain.Entities.Tag.Create(entity.Id!.Value, tag.Name);
+                var tagEntity = BlogV3.Domain.Entities.Tag.Create(entity.Id!.Value, tag);
                 await _tagRepository.AddAsync(tagEntity);
             }
             await _unitOfWork.SaveChangesAsync();

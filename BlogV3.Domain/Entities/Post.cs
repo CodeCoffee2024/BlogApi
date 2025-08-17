@@ -1,4 +1,5 @@
-﻿using BlogV3.Domain.Abstractions;
+﻿using BlogV3.Common.Entities;
+using BlogV3.Domain.Abstractions;
 
 namespace BlogV3.Domain.Entities
 {
@@ -29,6 +30,13 @@ namespace BlogV3.Domain.Entities
             Title = title;
             Description = description;
         }
+
+        public static IEnumerable<Status> Statuses => new[]
+        {
+            BlogV3.Common.Entities.Status.All,
+            BlogV3.Common.Entities.Status.Active,
+            BlogV3.Common.Entities.Status.Inactive,
+        };
 
         public static Post Create(Guid categoryId, string status, string title, string description, DateTime createdOn, Guid createdById, string imgPath = "")
         {

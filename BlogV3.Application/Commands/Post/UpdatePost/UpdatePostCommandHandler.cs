@@ -12,6 +12,7 @@ namespace BlogV3.Application.Commands.Post.UpdatePost
         IPostRepository _repository,
         ITagRepository _tagRepository,
         IMapper _mappper,
+        IFileService _fileService,
         IValidator<UpdatePostCommand> _validator,
         IUnitOfWork _unitOfWork
     ) : IRequestHandler<UpdatePostCommand, Result>
@@ -32,19 +33,22 @@ namespace BlogV3.Application.Commands.Post.UpdatePost
                 return Result.Failure<List<PostDto>>(Error.Validation, validationResult.ToErrorList());
             }
 
+            string imgPath = await _fileService.UploadImage(request.Img);
             var entity = await _repository.GetByIdAsync(request.Id);
             entity!.Update(
                 request.CategoryId,
                 request.Title,
                 request.Description,
                 DateTime.Now,
-                request.UserId
+                request.UserId,
+                imgPath
+
             );
             _repository.Update(entity);
 
             var existingTags = await _tagRepository.GetByPostIdAsync(entity.Id!.Value);
 
-            var incomingTagNames = request.Tags.Select(t => t.Name.Trim().ToLower()).ToList();
+            var incomingTagNames = request.Tags.Select(t => t.Trim().ToLower()).ToList();
             var existingTagNames = existingTags!.Select(t => t.Name.Trim().ToLower()).ToList();
 
             var tagsToAdd = incomingTagNames.Except(existingTagNames);

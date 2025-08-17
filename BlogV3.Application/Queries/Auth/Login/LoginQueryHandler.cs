@@ -17,13 +17,17 @@ namespace BlogV3.Application.Queries.Auth.Login
         {
             var user = await _repository.EmailUsernameExists(request.UsernameEmail!);
 
+            if (request.UsernameEmail == null)
+            {
+                return Result.Failure(Error.FormControl("usernameEmail", "This field is required"));
+            }
             if (user == null)
             {
-                return Result.Failure(Error.Notfound("User"));
+                return Result.Failure(Error.FormControl("usernameEmail", "User not found"));
             }
             if (!_passwordHasherService.VerifyPassword(user!.Password, request.Password!))
             {
-                return Result.Failure(Error.Invalid("User", "Invalid password"));
+                return Result.Failure(Error.FormControl("password", "Invalid password"));
             }
             var token = _jwtTokenGenerator.GenerateToken(user!);
             return Result.Success(token);

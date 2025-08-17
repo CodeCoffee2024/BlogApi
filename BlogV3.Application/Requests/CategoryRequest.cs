@@ -1,5 +1,6 @@
 ﻿using BlogV3.Application.Abstractions;
 using BlogV3.Application.Commands.Category.CreateCategory;
+using BlogV3.Application.Queries.Category.GetCategoryDropdown;
 using BlogV3.Application.Queries.Category.GetCategoryList;
 
 namespace BlogV3.Application.Requests
@@ -10,7 +11,7 @@ namespace BlogV3.Application.Requests
 
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string Status { get; set; } = String.Empty;
+        public string? Status { get; set; } = string.Empty;
 
         #endregion Properties
 
@@ -20,6 +21,7 @@ namespace BlogV3.Application.Requests
             new(UserId, Name);
 
         public GetCategoryListQuery ToQuery() => new(Search, OrderBy, PageNumber, PageSize, Status);
+        public GetCategoryDropdownQuery ToDropdownQuery() => new(Search, PageNumber);
 
         #endregion Public Methods
     }

@@ -1,9 +1,9 @@
-﻿using System.Linq.Expressions;
-using AutoMapper;
+﻿using AutoMapper;
 using BlogV3.Application.Dtos;
 using BlogV3.Domain.Abstractions;
 using BlogV3.Domain.Interfaces;
 using MediatR;
+using System.Linq.Expressions;
 
 namespace BlogV3.Application.Queries.Category.GetCategoryList
 {
@@ -17,7 +17,8 @@ namespace BlogV3.Application.Queries.Category.GetCategoryList
         public async Task<Result<PageResult<CategoryDto>>> Handle(GetCategoryListQuery request, CancellationToken cancellationToken)
         {
             Expression<Func<Domain.Entities.Category, bool>>? statusFilter = null;
-            statusFilter = c => c.Status == request.Status;
+            statusFilter = c =>
+            (string.IsNullOrEmpty(request.Status) || c.Status == request.Status);
             var pagedResult = await _repository.GetPaginatedCategoriesAsync(
                 request.PageNumber, request.PageSize, request.Search, request.OrderBy!, statusFilter);
 

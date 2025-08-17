@@ -43,7 +43,7 @@ namespace BlogV3.Application.Commands.User.UpdateUser
                 return Result.Failure<List<UserDto>>(Error.Validation, validationResult.ToErrorList());
             }
             var entity = await _repository.GetByIdAsync(request.Id);
-            entity!.Update(request.UserName, request.Email, request.Password, request.FirstName, request.LastName, request.MiddleName, DateTime.Now, request.UserId);
+            entity!.Update(request.FirstName, request.LastName, request.MiddleName, DateTime.Now, request.UserId);
             _repository.Update(entity);
             await _unitOfWork.SaveChangesAsync();
             return Result.Success(_mappper.Map<UserDto>(entity));

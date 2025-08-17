@@ -4,7 +4,7 @@ using MediatR;
 
 namespace BlogV3.Application.Queries.User.GetUserList
 {
-    public class GetUserListQuery : PagedQuery, IRequest<Result<PageResult<GetUserListResponse>>>
+    public class GetUserListQuery : PagedQuery, IRequest<Result<PageResult<UserDto>>>
     {
         #region Public Constructors
 

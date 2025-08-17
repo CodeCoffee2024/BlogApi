@@ -9,6 +9,8 @@ namespace BlogV3.Application.Interfaces.Common
 
         LoginResponse GenerateToken(User user);
 
+        Task<LoginResponse> RefreshToken(string refreshToken);
+
         #endregion Public Methods
     }
 }

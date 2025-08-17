@@ -1,4 +1,5 @@
 ﻿using BlogV3.Api.Shared;
+using BlogV3.Application.Queries.Auth.RefreshToken;
 using BlogV3.Application.Requests;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +33,14 @@ namespace BlogV3.Api.Controllers
         {
             var command = request.SetRegisterCommand();
             var result = await _sender.Send(command, cancellationToken);
+            return HandleResponse(result);
+        }
+
+        [HttpGet("Refresh/{refreshToken}")]
+        public async Task<IActionResult> RefreshToken([FromRoute] string refreshToken, CancellationToken cancellationToken)
+        {
+            var userAccessQuery = new RefreshTokenQuery(refreshToken);
+            var result = await _sender.Send(userAccessQuery);
             return HandleResponse(result);
         }
 

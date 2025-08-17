@@ -67,11 +67,8 @@ namespace BlogV3.Domain.Entities
 
         public void FlagAsSystemGenerated() => IsSystemGenerated = true;
 
-        public User Update(string userName, string email, string password, string firstName, string lastName, string middleName, DateTime updatedOn, Guid updatedById)
+        public User Update(string firstName, string lastName, string middleName, DateTime updatedOn, Guid updatedById)
         {
-            UserName = userName;
-            Email = email;
-            Password = password;
             FirstName = firstName;
             LastName = lastName;
             MiddleName = middleName;

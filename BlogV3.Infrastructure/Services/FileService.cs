@@ -32,10 +32,6 @@ namespace BlogV3.Infrastructure.Services
             return uniqueFileName;
         }
 
-        //public string UploadFile(IFormFile file)
-        //{
-        //}
-
         #endregion Public Methods
     }
 }

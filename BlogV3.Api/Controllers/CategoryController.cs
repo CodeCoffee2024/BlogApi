@@ -2,6 +2,7 @@
 using BlogV3.Api.Shared;
 using BlogV3.Application.Commands.Category.DeleteCategory;
 using BlogV3.Application.Queries.Category.GetOneCategory;
+using BlogV3.Application.Queries.Role.GetRoleStatuses;
 using BlogV3.Application.Requests;
 using BlogV3.Common.Constants;
 using MediatR;
@@ -38,6 +39,23 @@ namespace BlogV3.Api.Controllers
         {
             var command = new DeleteCategoryCommand(id);
             var result = await _sender.Send(command, cancellationToken);
+            return HandleResponse(result);
+        }
+
+        [HttpGet("GetStatuses")]
+        [PermissionAuthorize(Modules.CATEGORY, Permissions.VIEW)]
+        public async Task<IActionResult> GetStatuses()
+        {
+            var result = await _sender.Send(new GetRoleStatusesQuery());
+            return HandleResponse(result);
+        }
+
+        [HttpGet("Dropdown")]
+        [PermissionAuthorize(Modules.CATEGORY, Permissions.VIEW)]
+        public async Task<IActionResult> Dropdown([FromQuery] CategoryRequest request)
+        {
+            var query = request.ToQuery();
+            var result = await _sender.Send(query);
             return HandleResponse(result);
         }
 

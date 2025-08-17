@@ -1,4 +1,5 @@
-﻿using BlogV3.Domain.Abstractions;
+﻿using BlogV3.Common.Entities;
+using BlogV3.Domain.Abstractions;
 
 namespace BlogV3.Domain.Entities
 {
@@ -23,6 +24,13 @@ namespace BlogV3.Domain.Entities
             Name = name;
             Status = status;
         }
+
+        public static IEnumerable<Status> Statuses => new[]
+                {
+            BlogV3.Common.Entities.Status.All,
+            BlogV3.Common.Entities.Status.Active,
+            BlogV3.Common.Entities.Status.Inactive,
+        };
 
         public static Category Create(string name, string status, DateTime createdOn, Guid createdById)
         {
