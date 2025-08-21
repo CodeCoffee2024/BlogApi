@@ -32,7 +32,7 @@ jobs:
 
       - name: ACR Login
         run: |
-          az acr login --name myregistry
+          az acr login --name CodeCoffee
 
       - name: Build and push Docker image
         run: |
