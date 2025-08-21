@@ -3,7 +3,7 @@ name: Deploy .NET API to Azure with Docker + ACR
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   DOTNET_VERSION: '8.0'
