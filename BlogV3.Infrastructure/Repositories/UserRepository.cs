@@ -1,4 +1,6 @@
-﻿using BlogV3.Domain.Abstractions;
+﻿using BlogV3.Application.Extensions;
+using BlogV3.Common.Entities;
+using BlogV3.Domain.Abstractions;
 using BlogV3.Domain.Entities;
 using BlogV3.Domain.Interfaces;
 using BlogV3.Infrastructure.Data;
@@ -42,6 +44,36 @@ namespace BlogV3.Infrastructure.Repositories
         public async Task<PageResult<User>> GetPaginatedUsersAsync(int page, int pageSize, string? search, string orderBy, Expression<Func<User, bool>>? statusFilter = null)
         {
             return await GetPaginatedAsync(page, pageSize, search, new[] { "Email", "Status", "UserName", "FirstName", "MiddleName", "LastName", "UserRoles.Role.Name" }, orderBy, statusFilter);
+        }
+
+        public async Task<int> GetActiveUsersCount()
+        {
+            return await _context.Set<User>().Where(user => user.Status == Status.Active.GetDescription()).CountAsync();
+        }
+
+        public async Task<int> GetNewUsersForWeekCount()
+        {
+            var startOfWeek = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek);
+            var endOfWeek = startOfWeek.AddDays(7);
+
+            return await _context.Set<User>()
+                .Where(it => it.CreatedOn >= startOfWeek && it.CreatedOn < endOfWeek)
+                .CountAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetUsersByDateRangeAsync(
+            DateTime dateFrom,
+            DateTime dateTo,
+            CancellationToken cancellationToken)
+        {
+            var from = new DateTime(dateFrom.Year, dateFrom.Month, 1, 0, 0, 0);
+
+            var lastDay = DateTime.DaysInMonth(dateTo.Year, dateTo.Month);
+            var to = new DateTime(dateTo.Year, dateTo.Month, lastDay, 23, 59, 59);
+
+            return await _context.Set<User>()
+                .Where(u => u.CreatedOn >= from && u.CreatedOn <= to)
+                .ToListAsync(cancellationToken);
         }
 
         #endregion Public Constructors

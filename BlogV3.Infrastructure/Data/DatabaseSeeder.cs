@@ -29,7 +29,7 @@ namespace BlogV3.Infrastructure.Data
                     Module.Create("Posts", "/posts", admin.Id!.Value),
                     Module.Create("Categories", "/categories", admin.Id!.Value),
                     Module.Create("Users", "/users", admin.Id!.Value),
-                    Module.Create("Dashboard", "/", admin.Id!.Value)
+                    Module.Create("Dashboard", "/admin/dashboard", admin.Id!.Value)
                 ];
                 var module = modules[0];
                 var post = modules[1];

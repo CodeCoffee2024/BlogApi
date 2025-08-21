@@ -34,6 +34,16 @@ namespace BlogV3.Domain.Interfaces
 
         Task<PageResult<User>> GetPaginatedUsersAsync(int page, int pageSize, string? search, string orderBy, Expression<Func<User, bool>>? statusFilter);
 
+        Task<int> GetActiveUsersCount();
+
+        Task<int> GetNewUsersForWeekCount();
+
+        Task<IEnumerable<User>> GetUsersByDateRangeAsync(
+
+        DateTime dateFrom,
+        DateTime dateTo,
+        CancellationToken cancellationToken);
+
         #endregion Public Methods
     }
 }

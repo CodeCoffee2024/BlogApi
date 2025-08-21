@@ -20,6 +20,16 @@ namespace BlogV3.Domain.Interfaces
 
         Task<IEnumerable<Post>> GetLatest();
 
+        Task<int> GetActivePostsCount();
+
+        Task<int> GetNewPostsForWeekCount();
+
+        Task<IEnumerable<Post>> GetPostsByDateRangeAsync(
+
+        DateTime dateFrom,
+        DateTime dateTo,
+        CancellationToken cancellationToken);
+
         Task AddAsync(Post post);
 
         void Update(Post post);

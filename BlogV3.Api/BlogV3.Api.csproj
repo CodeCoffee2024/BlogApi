@@ -4,6 +4,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>83f31d1e-7ace-4e1a-a23f-88c2d725e25b</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -22,6 +24,9 @@
   <ItemGroup>
     <ProjectReference Include="..\BlogV3.Application\BlogV3.Application.csproj" />
     <ProjectReference Include="..\BlogV3.Infrastructure\BlogV3.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".github\workflows\deploy.yml" />
   </ItemGroup>
 
 </Project>

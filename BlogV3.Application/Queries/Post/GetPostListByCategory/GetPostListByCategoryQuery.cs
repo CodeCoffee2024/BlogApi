@@ -1,9 +1,10 @@
-﻿using BlogV3.Domain.Abstractions;
+﻿using BlogV3.Application.Dtos;
+using BlogV3.Domain.Abstractions;
 using MediatR;
 
 namespace BlogV3.Application.Queries.Post.GetPostListByCategory
 {
-    public class GetPostListByCategoryQuery : PagedQuery, IRequest<Result<PageResult<GetPostListByCategoryResponse>>>
+    public class GetPostListByCategoryQuery : PagedQuery, IRequest<Result<PageResult<PostDto>>>
     {
         #region Public Constructors
 
