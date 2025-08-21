@@ -9,7 +9,7 @@ env:
   DOTNET_VERSION: '8.0'
   IMAGE_NAME: blog-api
   REGISTRY: codecoffee.azurecr.io   # <-- your ACR login server
-  AZURE_WEBAPP_NAME: my-blog-api
+  AZURE_WEBAPP_NAME: Blog
 
 jobs:
   build-and-deploy:
